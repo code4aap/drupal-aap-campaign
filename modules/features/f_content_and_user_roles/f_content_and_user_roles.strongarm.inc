@@ -21,7 +21,7 @@ function f_content_and_user_roles_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'additional_settings__active_tab_blog';
-  $strongarm->value = 'edit-og';
+  $strongarm->value = 'edit-workflow';
   $export['additional_settings__active_tab_blog'] = $strongarm;
 
   $strongarm = new stdClass();

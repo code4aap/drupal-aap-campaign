@@ -24,5 +24,14 @@ function f_wysiwyg_image_user_default_permissions() {
     'module' => 'filter',
   );
 
+  // Exported permission: use text format restricted_html.
+  $permissions['use text format restricted_html'] = array(
+    'name' => 'use text format restricted_html',
+    'roles' => array(
+      'Content Author' => 'Content Author',
+    ),
+    'module' => 'filter',
+  );
+
   return $permissions;
 }

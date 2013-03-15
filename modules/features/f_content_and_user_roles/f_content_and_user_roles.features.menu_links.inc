@@ -18,7 +18,7 @@ function f_content_and_user_roles_menu_default_menu_links() {
     'link_title' => 'Blogs',
     'options' => array(),
     'module' => 'system',
-    'hidden' => '0',
+    'hidden' => '1',
     'external' => '0',
     'has_children' => '1',
     'expanded' => '0',
@@ -55,7 +55,7 @@ function f_content_and_user_roles_menu_default_menu_links() {
     'external' => '0',
     'has_children' => '0',
     'expanded' => '0',
-    'weight' => '-47',
+    'weight' => '0',
     'parent_path' => 'node/add',
   );
   // Translatables
