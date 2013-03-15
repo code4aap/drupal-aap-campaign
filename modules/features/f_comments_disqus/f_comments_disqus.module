@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Comments Disqus feature.
+ */
+
+include_once 'f_comments_disqus.features.inc';
