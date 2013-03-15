@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the wysiwyg image feature.
+ */
+
+include_once 'f_wysiwyg_image.features.inc';
