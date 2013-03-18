@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Invite and contact importer feature.
+ */
+
+include_once 'f_invite_and_contact_importer.features.inc';
