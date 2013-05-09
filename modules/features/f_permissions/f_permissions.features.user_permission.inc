@@ -69,7 +69,9 @@ function f_permissions_user_default_permissions() {
   // Exported permission: access devel information.
   $permissions['access devel information'] = array(
     'name' => 'access devel information',
-    'roles' => array(),
+    'roles' => array(
+      'Content Approver' => 'Content Approver',
+    ),
     'module' => 'devel',
   );
 
@@ -99,28 +101,6 @@ function f_permissions_user_default_permissions() {
     'name' => 'access site reports',
     'roles' => array(),
     'module' => 'system',
-  );
-
-  // Exported permission: access workbench.
-  $permissions['access workbench'] = array(
-    'name' => 'access workbench',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-      'Content Author' => 'Content Author',
-      'Party Leardership' => 'Party Leardership',
-    ),
-    'module' => 'workbench',
-  );
-
-  // Exported permission: access workbench access by role.
-  $permissions['access workbench access by role'] = array(
-    'name' => 'access workbench access by role',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-      'Content Author' => 'Content Author',
-      'Party Leardership' => 'Party Leardership',
-    ),
-    'module' => 'workbench_access',
   );
 
   // Exported permission: add media from remote sources.
@@ -205,7 +185,9 @@ function f_permissions_user_default_permissions() {
   // Exported permission: administer masquerade.
   $permissions['administer masquerade'] = array(
     'name' => 'administer masquerade',
-    'roles' => array(),
+    'roles' => array(
+      'Administrator' => 'Administrator',
+    ),
     'module' => 'masquerade',
   );
 
@@ -363,41 +345,6 @@ function f_permissions_user_default_permissions() {
     'module' => 'views',
   );
 
-  // Exported permission: administer workbench.
-  $permissions['administer workbench'] = array(
-    'name' => 'administer workbench',
-    'roles' => array(),
-    'module' => 'workbench',
-  );
-
-  // Exported permission: administer workbench access.
-  $permissions['administer workbench access'] = array(
-    'name' => 'administer workbench access',
-    'roles' => array(),
-    'module' => 'workbench_access',
-  );
-
-  // Exported permission: administer workbench moderation.
-  $permissions['administer workbench moderation'] = array(
-    'name' => 'administer workbench moderation',
-    'roles' => array(),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: assign workbench access.
-  $permissions['assign workbench access'] = array(
-    'name' => 'assign workbench access',
-    'roles' => array(),
-    'module' => 'workbench_access',
-  );
-
-  // Exported permission: batch update workbench access.
-  $permissions['batch update workbench access'] = array(
-    'name' => 'batch update workbench access',
-    'roles' => array(),
-    'module' => 'workbench_access',
-  );
-
   // Exported permission: block IP addresses.
   $permissions['block IP addresses'] = array(
     'name' => 'block IP addresses',
@@ -412,13 +359,6 @@ function f_permissions_user_default_permissions() {
       'Content Approver' => 'Content Approver',
     ),
     'module' => 'node',
-  );
-
-  // Exported permission: bypass workbench moderation.
-  $permissions['bypass workbench moderation'] = array(
-    'name' => 'bypass workbench moderation',
-    'roles' => array(),
-    'module' => 'workbench_moderation',
   );
 
   // Exported permission: cancel account.
@@ -796,44 +736,19 @@ function f_permissions_user_default_permissions() {
   // Exported permission: masquerade as admin.
   $permissions['masquerade as admin'] = array(
     'name' => 'masquerade as admin',
-    'roles' => array(),
+    'roles' => array(
+      'Administrator' => 'Administrator',
+    ),
     'module' => 'masquerade',
   );
 
   // Exported permission: masquerade as user.
   $permissions['masquerade as user'] = array(
     'name' => 'masquerade as user',
-    'roles' => array(),
+    'roles' => array(
+      'Administrator' => 'Administrator',
+    ),
     'module' => 'masquerade',
-  );
-
-  // Exported permission: moderate content from draft to needs_review.
-  $permissions['moderate content from draft to needs_review'] = array(
-    'name' => 'moderate content from draft to needs_review',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-      'Content Author' => 'Content Author',
-      'Party Leardership' => 'Party Leardership',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: moderate content from needs_review to draft.
-  $permissions['moderate content from needs_review to draft'] = array(
-    'name' => 'moderate content from needs_review to draft',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: moderate content from needs_review to published.
-  $permissions['moderate content from needs_review to published'] = array(
-    'name' => 'moderate content from needs_review to published',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-    ),
-    'module' => 'workbench_moderation',
   );
 
   // Exported permission: notify of path changes.
@@ -917,35 +832,6 @@ function f_permissions_user_default_permissions() {
     'module' => 'panels',
   );
 
-  // Exported permission: use workbench_moderation my drafts tab.
-  $permissions['use workbench_moderation my drafts tab'] = array(
-    'name' => 'use workbench_moderation my drafts tab',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-      'Content Author' => 'Content Author',
-      'Party Leardership' => 'Party Leardership',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: use workbench_moderation needs review tab.
-  $permissions['use workbench_moderation needs review tab'] = array(
-    'name' => 'use workbench_moderation needs review tab',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: view all unpublished content.
-  $permissions['view all unpublished content'] = array(
-    'name' => 'view all unpublished content',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
   // Exported permission: view media.
   $permissions['view media'] = array(
     'name' => 'view media',
@@ -955,28 +841,6 @@ function f_permissions_user_default_permissions() {
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'media',
-  );
-
-  // Exported permission: view moderation history.
-  $permissions['view moderation history'] = array(
-    'name' => 'view moderation history',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-      'Content Author' => 'Content Author',
-      'Party Leardership' => 'Party Leardership',
-    ),
-    'module' => 'workbench_moderation',
-  );
-
-  // Exported permission: view moderation messages.
-  $permissions['view moderation messages'] = array(
-    'name' => 'view moderation messages',
-    'roles' => array(
-      'Content Approver' => 'Content Approver',
-      'Content Author' => 'Content Author',
-      'Party Leardership' => 'Party Leardership',
-    ),
-    'module' => 'workbench_moderation',
   );
 
   // Exported permission: view own profile_personal_details profile.
@@ -1025,24 +889,11 @@ function f_permissions_user_default_permissions() {
     'module' => 'system',
   );
 
-  // Exported permission: view workbench access information.
-  $permissions['view workbench access information'] = array(
-    'name' => 'view workbench access information',
-    'roles' => array(),
-    'module' => 'workbench_access',
-  );
-
-  // Exported permission: view workbench taxonomy pages.
-  $permissions['view workbench taxonomy pages'] = array(
-    'name' => 'view workbench taxonomy pages',
-    'roles' => array(),
-    'module' => 'workbench_access',
-  );
-
   // Exported permission: vote on polls.
   $permissions['vote on polls'] = array(
     'name' => 'vote on polls',
     'roles' => array(
+      'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
     'module' => 'poll',
