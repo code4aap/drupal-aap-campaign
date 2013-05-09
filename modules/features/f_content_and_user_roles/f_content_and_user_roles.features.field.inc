@@ -78,7 +78,7 @@ function f_content_and_user_roles_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => '31',
+        'weight' => 31,
       ),
     ),
   );
@@ -348,7 +348,7 @@ function f_content_and_user_roles_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -506,7 +506,7 @@ If an event is a full day event, and you do not want to show start+end time, che
             'multiple_to' => '',
           ),
           'type' => 'date_default',
-          'weight' => 1,
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -545,70 +545,241 @@ If an event is a full day event, and you do not want to show start+end time, che
     ),
   );
 
-  // Exported field: 'node-event-og_group_ref'.
-  $fields['node-event-og_group_ref'] = array(
+  // Exported field: 'node-event-field_location'.
+  $fields['node-event-field_location'] = array(
     'field_config' => array(
       'active' => '1',
       'cardinality' => '1',
       'deleted' => '0',
       'entity_types' => array(),
-      'field_name' => 'og_group_ref',
-      'foreign keys' => array(
-        'node' => array(
-          'columns' => array(
-            'target_id' => 'nid',
-          ),
-          'table' => 'node',
-        ),
-      ),
+      'field_name' => 'field_location',
+      'foreign keys' => array(),
       'indexes' => array(
-        'target_id' => array(
-          0 => 'target_id',
+        'lid' => array(
+          0 => 'lid',
         ),
       ),
       'locked' => '0',
-      'module' => 'entityreference',
+      'module' => 'location_cck',
       'settings' => array(
-        'handler' => 'og',
-        'handler_settings' => array(
-          'behaviors' => array(
-            'og_behavior' => array(
-              'status' => TRUE,
-            ),
-            'views-select-list' => array(
-              'status' => 0,
+        'gmap_macro' => '[gmap ]',
+        'gmap_marker' => 'drupal',
+        'location_settings' => array(
+          'display' => array(
+            'hide' => array(
+              'additional' => 0,
+              'city' => 0,
+              'coords' => 0,
+              'country' => 0,
+              'country_name' => 0,
+              'locpick' => 0,
+              'map_link' => 0,
+              'name' => 0,
+              'postal_code' => 0,
+              'province' => 0,
+              'province_name' => 0,
+              'street' => 0,
             ),
           ),
-          'membership_type' => 'og_membership_type_default',
-          'sort' => array(
-            'type' => 'none',
-          ),
-          'target_bundles' => array(
-            'group' => 'group',
+          'form' => array(
+            'fields' => array(
+              'additional' => array(
+                'collect' => '1',
+                'default' => '',
+                'weight' => '6',
+              ),
+              'city' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '8',
+              ),
+              'country' => array(
+                'collect' => '2',
+                'default' => 'in',
+                'weight' => '14',
+              ),
+              'locpick' => array(
+                'collect' => '1',
+                'weight' => '20',
+              ),
+              'name' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '2',
+              ),
+              'postal_code' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '12',
+              ),
+              'province' => array(
+                'collect' => '2',
+                'default' => 'Delhi',
+                'weight' => '10',
+                'widget' => 'autocomplete',
+              ),
+              'street' => array(
+                'collect' => '2',
+                'default' => '',
+                'weight' => '4',
+              ),
+            ),
           ),
         ),
-        'handler_submit' => 'Change handler',
         'profile2_private' => FALSE,
-        'target_type' => 'node',
       ),
-      'target_type' => 'node',
       'translatable' => '0',
-      'type' => 'entityreference',
+      'type' => 'location',
     ),
     'field_instance' => array(
       'bundle' => 'event',
-      'default_value' => NULL,
-      'default_value_function' => 'entityreference_prepopulate_field_default_value',
+      'default_value' => array(
+        0 => array(
+          'location_settings' => array(
+            'display' => array(
+              'hide' => array(
+                'additional' => 0,
+                'city' => 0,
+                'coords' => 0,
+                'country' => 0,
+                'country_name' => 0,
+                'locpick' => 0,
+                'map_link' => 0,
+                'name' => 0,
+                'postal_code' => 0,
+                'province' => 0,
+                'province_name' => 0,
+                'street' => 0,
+              ),
+            ),
+            'form' => array(
+              'fields' => array(
+                'additional' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => '1',
+                  'default' => '',
+                  'weight' => '6',
+                ),
+                'city' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => '',
+                  'weight' => '8',
+                ),
+                'country' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => 'us',
+                  'weight' => '14',
+                ),
+                'delete_location' => array(
+                  'default' => FALSE,
+                  'nodiff' => TRUE,
+                ),
+                'is_primary' => array(
+                  'default' => 0,
+                ),
+                'latitude' => array(
+                  'default' => 0,
+                ),
+                'lid' => array(
+                  'default' => FALSE,
+                ),
+                'locpick' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => '1',
+                  'default' => FALSE,
+                  'nodiff' => TRUE,
+                  'weight' => '20',
+                ),
+                'longitude' => array(
+                  'default' => 0,
+                ),
+                'name' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => '',
+                  'weight' => '2',
+                ),
+                'postal_code' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => '',
+                  'weight' => '12',
+                ),
+                'province' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => '',
+                  'weight' => '10',
+                  'widget' => 'autocomplete',
+                ),
+                'source' => array(
+                  'default' => 0,
+                ),
+                'street' => array(
+                  '#parents' => array(
+                    0 => 'field_location',
+                    1 => 'und',
+                    2 => 0,
+                  ),
+                  'collect' => 1,
+                  'default' => '',
+                  'weight' => '4',
+                ),
+              ),
+            ),
+          ),
+          'name' => '',
+          'street' => '',
+          'additional' => '',
+          'city' => '',
+          'province' => 'Delhi',
+          'postal_code' => '',
+          'country' => 'in',
+          'locpick' => array(
+            'user_latitude' => '',
+            'user_longitude' => '',
+          ),
+        ),
+      ),
       'deleted' => '0',
-      'description' => 'If what you are creating is of general interest or related to broad issue, do not select any option from the list above.<br>
-Otherwise, if your content is very specific to one of your interest groups above, you can select that. In such a case your content will be shown inside the group only.<br>',
+      'description' => '',
       'display' => array(
         'default' => array(
           'label' => 'above',
-          'module' => 'og_ui',
+          'module' => 'location_cck',
           'settings' => array(),
-          'type' => 'og_list_default',
-          'weight' => 2,
+          'type' => 'location_default',
+          'weight' => '2',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -618,49 +789,18 @@ Otherwise, if your content is very specific to one of your interest groups above
         ),
       ),
       'entity_type' => 'node',
-      'field_name' => 'og_group_ref',
-      'label' => 'Groups audience',
-      'required' => 0,
+      'field_name' => 'field_location',
+      'label' => 'location',
+      'required' => 1,
       'settings' => array(
-        'behaviors' => array(
-          'og_widget' => array(
-            'admin' => array(
-              'widget_type' => 'entityreference_autocomplete',
-            ),
-            'default' => array(
-              'widget_type' => 'options_select',
-            ),
-            'status' => TRUE,
-          ),
-          'prepopulate' => array(
-            'action' => 'none',
-            'action_on_edit' => 0,
-            'fallback' => 'none',
-            'og_context' => 0,
-            'skip_perm' => '0',
-            'status' => 1,
-          ),
-        ),
         'user_register_form' => FALSE,
-      ),
-      'view modes' => array(
-        'full' => array(
-          'custom settings' => FALSE,
-          'label' => 'Full',
-          'type' => 'og_list_default',
-        ),
-        'teaser' => array(
-          'custom settings' => FALSE,
-          'label' => 'Teaser',
-          'type' => 'og_list_default',
-        ),
       ),
       'widget' => array(
         'active' => 0,
-        'module' => 'og',
+        'module' => 'location_cck',
         'settings' => array(),
-        'type' => 'og_complex',
-        'weight' => '5',
+        'type' => 'location',
+        'weight' => '8',
       ),
       'workbench_access_field' => 0,
     ),
@@ -815,6 +955,101 @@ Otherwise, if your content is very specific to one of your interest groups above
     ),
   );
 
+  // Exported field: 'node-news-field_simplenews_term'.
+  $fields['node-news-field_simplenews_term'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_simplenews_term',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'newsletter',
+            'parent' => 0,
+          ),
+        ),
+        'profile2_private' => FALSE,
+      ),
+      'translatable' => '1',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'news',
+      'default_value' => array(
+        0 => array(
+          'tid' => '28',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'hidden',
+          'module' => 'taxonomy',
+          'settings' => array(),
+          'type' => 'taxonomy_term_reference_link',
+          'weight' => 3,
+        ),
+        'email_html' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'email_plain' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'email_textalt' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+        'teaser' => array(
+          'label' => 'hidden',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 2,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_simplenews_term',
+      'label' => 'Newsletter category',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_buttons',
+        'weight' => '41',
+      ),
+      'workbench_access_field' => 0,
+    ),
+  );
+
   // Exported field: 'node-poll-field_content_tags'.
   $fields['node-poll-field_content_tags'] = array(
     'field_config' => array(
@@ -895,13 +1130,12 @@ Otherwise, if your content is very specific to one of your interest groups above
   // Included for use with string extractors like potx.
   t('Body');
   t('Date');
-  t('Groups audience');
-  t('If what you are creating is of general interest or related to broad issue, do not select any option from the list above.<br>
-Otherwise, if your content is very specific to one of your interest groups above, you can select that. In such a case your content will be shown inside the group only.<br>');
+  t('Newsletter category');
   t('Select the date and time for when the event starts and when the event ends. <br>
 If you just want to enter the start time of the event, uncheck the option \'show end date\'. <br>
 If an event is a full day event, and you do not want to show start+end time, check the option \'all day\'. <br><br>');
   t('Tags');
+  t('location');
 
   return $fields;
 }
