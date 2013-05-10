@@ -8,7 +8,6 @@ project = f_content_and_user_roles
 dependencies[] = blog
 dependencies[] = ctools
 dependencies[] = date
-dependencies[] = entityreference
 dependencies[] = f_issue_based_groups
 dependencies[] = features
 dependencies[] = image
