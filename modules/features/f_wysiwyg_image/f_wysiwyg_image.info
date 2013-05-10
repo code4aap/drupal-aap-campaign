@@ -6,6 +6,7 @@ php = 5.2.4
 version = 7.x-1.0
 project = f_wysiwyg_image
 dependencies[] = filter
+dependencies[] = htmlpurifier
 dependencies[] = imce
 dependencies[] = imce_wysiwyg
 dependencies[] = wysiwyg

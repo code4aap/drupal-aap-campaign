@@ -364,7 +364,7 @@ Otherwise, if your content is very specific to one of your interest groups above
         'module' => 'og',
         'settings' => array(),
         'type' => 'og_complex',
-        'weight' => '0',
+        'weight' => 0,
       ),
       'workbench_access_field' => 0,
     ),

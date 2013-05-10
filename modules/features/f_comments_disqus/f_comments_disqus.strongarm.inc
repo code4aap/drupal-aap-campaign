@@ -21,7 +21,7 @@ function f_comments_disqus_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'disqus_domain';
-  $strongarm->value = 'niftyupdate';
+  $strongarm->value = 'aapdl';
   $export['disqus_domain'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -51,10 +51,10 @@ function f_comments_disqus_strongarm() {
   $strongarm->name = 'disqus_nodetypes';
   $strongarm->value = array(
     'blog' => 'blog',
+    'basic_page' => 'basic_page',
     'event' => 'event',
     'news' => 'news',
     'poll' => 'poll',
-    'basic_page' => 0,
     'group' => 0,
   );
   $export['disqus_nodetypes'] = $strongarm;
@@ -84,7 +84,7 @@ function f_comments_disqus_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'disqus_userapikey';
-  $strongarm->value = 'mcC6AYzTff7zJtgduPPXc1Bjo07QMv3OCGmS7KRaLw1TdJtI1SAIR5UhyZ7nJYhW';
+  $strongarm->value = 'Sk8vXIFy5oyGmeRWhq9pt6hIEdFEk7DY4yXde8R8hXeK6I4aPBn2QreXvM7FjTYI';
   $export['disqus_userapikey'] = $strongarm;
 
   $strongarm = new stdClass();

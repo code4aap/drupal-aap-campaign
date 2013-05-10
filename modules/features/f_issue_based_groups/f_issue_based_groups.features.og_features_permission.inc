@@ -31,14 +31,6 @@ function f_issue_based_groups_og_features_default_permissions() {
     ),
   );
 
-  // Exported og permission: 'node:group:create blog content'
-  $permissions['node:group:create blog content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-      'member' => 'member',
-    ),
-  );
-
   // Exported og permission: 'node:group:create event content'
   $permissions['node:group:create event content'] = array(
     'roles' => array(
@@ -55,13 +47,6 @@ function f_issue_based_groups_og_features_default_permissions() {
 
   // Exported og permission: 'node:group:create poll content'
   $permissions['node:group:create poll content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
-  );
-
-  // Exported og permission: 'node:group:delete any blog content'
-  $permissions['node:group:delete any blog content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
     ),
@@ -85,13 +70,6 @@ function f_issue_based_groups_og_features_default_permissions() {
   $permissions['node:group:delete any poll content'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
-    ),
-  );
-
-  // Exported og permission: 'node:group:delete own blog content'
-  $permissions['node:group:delete own blog content'] = array(
-    'roles' => array(
-      'member' => 'member',
     ),
   );
 
@@ -148,13 +126,6 @@ function f_issue_based_groups_og_features_default_permissions() {
     ),
   );
 
-  // Exported og permission: 'node:group:update any blog content'
-  $permissions['node:group:update any blog content'] = array(
-    'roles' => array(
-      'administrator member' => 'administrator member',
-    ),
-  );
-
   // Exported og permission: 'node:group:update any event content'
   $permissions['node:group:update any event content'] = array(
     'roles' => array(
@@ -180,13 +151,6 @@ function f_issue_based_groups_og_features_default_permissions() {
   $permissions['node:group:update group'] = array(
     'roles' => array(
       'administrator member' => 'administrator member',
-    ),
-  );
-
-  // Exported og permission: 'node:group:update own blog content'
-  $permissions['node:group:update own blog content'] = array(
-    'roles' => array(
-      'member' => 'member',
     ),
   );
 
