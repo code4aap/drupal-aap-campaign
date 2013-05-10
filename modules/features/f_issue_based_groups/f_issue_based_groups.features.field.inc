@@ -252,8 +252,6 @@ function f_issue_based_groups_field_default_fields() {
   // Translatables
   // Included for use with string extractors like potx.
   t('Body');
-  t('Determine if this is an OG group.');
-  t('Group');
   t('Group Image');
   t('Select and upload an image that would become the display image of this group. It would show at places where this group is listed. It is recommended that you upload a square image, as your uploaded image will be modified into a square tile.');
 
