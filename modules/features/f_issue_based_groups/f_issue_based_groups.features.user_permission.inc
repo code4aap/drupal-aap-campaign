@@ -10,13 +10,6 @@
 function f_issue_based_groups_user_default_permissions() {
   $permissions = array();
 
-  // Exported permission: administer group.
-  $permissions['administer group'] = array(
-    'name' => 'administer group',
-    'roles' => array(),
-    'module' => 'og',
-  );
-
   // Exported permission: create group content.
   $permissions['create group content'] = array(
     'name' => 'create group content',
