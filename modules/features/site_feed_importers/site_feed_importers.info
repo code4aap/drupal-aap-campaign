@@ -1,10 +1,14 @@
 name = Site Feed Importers
 core = 7.x
 package = Other Site Functionality
+php = 5.2.4
 version = 7.x-1.0
 project = site_feed_importers
 dependencies[] = ctools
 dependencies[] = feeds
+dependencies[] = feeds_tamper
 features[ctools][] = feeds:feeds_importer_default:1
+features[ctools][] = feeds_tamper:feeds_tamper_default:2
 features[features_api][] = api:1
 features[feeds_importer][] = main_site_news
+features[feeds_tamper][] = main_site_news-entrydate-string_to_unix_timestamp

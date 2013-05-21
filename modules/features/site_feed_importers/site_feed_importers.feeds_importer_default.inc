@@ -54,13 +54,13 @@ function site_feed_importers_feeds_importer_default() {
             'unique' => FALSE,
           ),
           2 => array(
-            'source' => 'PublishOnDate',
-            'target' => 'created',
+            'source' => 'link_url',
+            'target' => 'field_news_links:url',
             'unique' => FALSE,
           ),
           3 => array(
-            'source' => 'link_url',
-            'target' => 'field_news_links:url',
+            'source' => 'EntryDate',
+            'target' => 'created',
             'unique' => FALSE,
           ),
         ),
