@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Search settings feature.
+ */
+
+include_once 'f_search.features.inc';

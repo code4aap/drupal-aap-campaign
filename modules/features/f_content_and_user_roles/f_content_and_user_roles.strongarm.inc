@@ -153,6 +153,9 @@ function f_content_and_user_roles_strongarm() {
         'workbench_access' => array(
           'weight' => '0',
         ),
+        'metatags' => array(
+          'weight' => '40',
+        ),
       ),
       'display' => array(),
     ),

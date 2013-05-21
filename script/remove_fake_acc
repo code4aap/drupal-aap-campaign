@@ -1,0 +1,14 @@
+# Copy and execute at /develp/php
+
+$result  = db_query("SELECT u.uid
+FROM users u
+LEFT OUTER JOIN connector_user c ON u.uid = c.uid
+WHERE u.access =0
+AND u.login =0
+AND u.uid !=0
+AND c.primary_connection IS NULL ");
+
+$fake_accounts_arr = $result->fetchCol();
+
+user_delete_multiple($fake_accounts_arr);
+
