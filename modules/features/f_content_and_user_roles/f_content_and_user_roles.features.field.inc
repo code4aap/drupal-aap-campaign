@@ -52,7 +52,7 @@ function f_content_and_user_roles_field_default_fields() {
           'module' => 'text',
           'settings' => array(),
           'type' => 'text_default',
-          'weight' => 0,
+          'weight' => '0',
         ),
         'teaser' => array(
           'label' => 'hidden',
@@ -80,7 +80,7 @@ function f_content_and_user_roles_field_default_fields() {
           'summary_rows' => 5,
         ),
         'type' => 'text_textarea_with_summary',
-        'weight' => 31,
+        'weight' => '3',
       ),
     ),
   );
@@ -131,7 +131,7 @@ function f_content_and_user_roles_field_default_fields() {
           'module' => 'taxonomy',
           'settings' => array(),
           'type' => 'taxonomy_term_reference_link',
-          'weight' => 1,
+          'weight' => '1',
         ),
         'teaser' => array(
           'label' => 'above',
@@ -155,9 +155,84 @@ function f_content_and_user_roles_field_default_fields() {
           'size' => 60,
         ),
         'type' => 'taxonomy_autocomplete',
-        'weight' => '33',
+        'weight' => '4',
       ),
       'workbench_access_field' => 0,
+    ),
+  );
+
+  // Exported field: 'node-basic_page-field_page_type'.
+  $fields['node-basic_page-field_page_type'] = array(
+    'field_config' => array(
+      'active' => '1',
+      'cardinality' => '1',
+      'deleted' => '0',
+      'entity_types' => array(),
+      'field_name' => 'field_page_type',
+      'foreign keys' => array(
+        'tid' => array(
+          'columns' => array(
+            'tid' => 'tid',
+          ),
+          'table' => 'taxonomy_term_data',
+        ),
+      ),
+      'indexes' => array(
+        'tid' => array(
+          0 => 'tid',
+        ),
+      ),
+      'locked' => '0',
+      'module' => 'taxonomy',
+      'settings' => array(
+        'allowed_values' => array(
+          0 => array(
+            'vocabulary' => 'basic_page_type',
+            'parent' => '0',
+          ),
+        ),
+        'profile2_private' => FALSE,
+      ),
+      'translatable' => '0',
+      'type' => 'taxonomy_term_reference',
+    ),
+    'field_instance' => array(
+      'bundle' => 'basic_page',
+      'default_value' => array(
+        0 => array(
+          'tid' => '39',
+        ),
+      ),
+      'deleted' => '0',
+      'description' => '',
+      'display' => array(
+        'default' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => '2',
+        ),
+        'teaser' => array(
+          'label' => 'above',
+          'settings' => array(),
+          'type' => 'hidden',
+          'weight' => 0,
+        ),
+      ),
+      'entity_type' => 'node',
+      'field_name' => 'field_page_type',
+      'label' => 'Page Type',
+      'required' => 1,
+      'settings' => array(
+        'user_register_form' => FALSE,
+      ),
+      'widget' => array(
+        'active' => 1,
+        'module' => 'options',
+        'settings' => array(),
+        'type' => 'options_select',
+        'weight' => '0',
+      ),
     ),
   );
 
@@ -1263,6 +1338,7 @@ Otherwise, if your content is very specific to one of your interest groups above
   t('If what you are creating is of general interest or related to broad issue, do not select any option from the list above.<br>
 Otherwise, if your content is very specific to one of your interest groups above, you can select that. In such a case your content will be shown inside the group only.<br>');
   t('Links');
+  t('Page Type');
   t('Select the date and time for when the event starts and when the event ends. <br>
 If you just want to enter the start time of the event, uncheck the option \'show end date\'. <br>
 If an event is a full day event, and you do not want to show start+end time, check the option \'all day\'. <br><br>');
