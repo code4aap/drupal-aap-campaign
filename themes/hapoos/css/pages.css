@@ -350,3 +350,9 @@ div.sidebar-right-panel {
 .panels-flexible-region-inside-last {
   padding-right: 1em;
 }
+
+/* line 304, ../sass/pages.scss */
+.panels-row-main-menu, .panels-row-main-menu .inside {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
+}

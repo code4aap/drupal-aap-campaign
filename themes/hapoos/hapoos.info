@@ -79,6 +79,8 @@ stylesheets[all][] = css/main_menu.css
 ; Optionally add some JavaScripts to your theme.
 
 scripts[] = js/script.js
+scripts[] = js/json2.js
+scripts[] = js/jquery.cookie.js
 scripts[] = js/slides.min.jquery.js
 
 

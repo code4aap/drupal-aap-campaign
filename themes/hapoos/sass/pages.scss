@@ -300,3 +300,8 @@ div.read-more a {
   .panels-flexible-region-inside-last {
     padding-right: 1em;
   }
+
+  .panels-row-main-menu, .panels-row-main-menu .inside {
+      overflow-x: visible !important;
+      overflow-y: visible !important;
+  }
