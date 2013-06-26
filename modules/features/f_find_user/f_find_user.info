@@ -1,0 +1,11 @@
+name = Find User
+description = Search User by email id
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = f_find_user
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[views_view][] = find_user
+features_exclude[dependencies][ctools] = ctools
