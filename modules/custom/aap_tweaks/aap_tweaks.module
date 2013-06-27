@@ -8,19 +8,20 @@
  * Implements hook_form_alter().
  */
 function aap_tweaks_form_alter (&$form, &$form_state, $form_id) {
+
   // If we are on a node form and the setting for 'separate summary' is ON, do so.
   if (!(strpos($form_id, 'node_form') === FALSE)) {
     unset($form['body'][LANGUAGE_NONE][0]['summary']['#attached']);
   }
   if($form_id == "invite_form") {
     $form['message']['#disabled'] = TRUE;
-    $form['email']['#description'] = 'Enter the e-mail addresses of the persons you would like to invite. 
-    To specify multiple recipients, enter one e-mail address per line or separate each address with a comma. 
-    <div class="contact-importer-message">' .
-    t('You can also <a href=!importer-link class="contact-importer-link">import your ' .
-    'contacts from GMail, Yahoo!</a>',
-    array('!importer-link' => url('contact_importer'))) .
-    '</div>';
+    $form['email']['#description'] = 'Enter the e-mail addresses of the persons you would like to invite.
+      To specify multiple recipients, enter one e-mail address per line or separate each address with a comma.
+      <div class="contact-importer-message">' .
+      t('You can also <a href=!importer-link class="contact-importer-link">import your ' .
+        'contacts from GMail, Yahoo!</a>',
+        array('!importer-link' => url('contact_importer'))) .
+        '</div>';
   }
   return $form;
 }
@@ -29,9 +30,20 @@ function aap_tweaks_form_alter (&$form, &$form_state, $form_id) {
  * Implements hook_node_view_alter().
  */
 function aap_tweaks_node_view_alter(&$build) {
+
   if ($build['#view_mode'] == 'teaser' && isset($build['links']['disqus'])) {
     unset($build['links']['disqus']);
   }
+
+  // code for inserting block just above disqus comment
+  if (isset($build['disqus'])) {
+    $build['block'] = array(
+      '#prefix' => '<div class="service-links"><span style="color:blue">When expressing your views in the comments, please use clean and dignified language, even when you are expressing disagreement.
+                                     Also, we encourage you to <b>Flag</b> any abusive or highly irrelevant comments. Thank you.</span>',
+      '#suffix' => '</div>',
+      '#weight' => variable_get('disqus_weight', 50)-1,);
+  }
+
 }
 
 /**
@@ -59,7 +71,6 @@ function aap_tweaks_menu() {
     'file' => 'aap_tweaks.pages.inc',
   );
 
-  return $items;
 }
 
 /**
@@ -166,4 +177,5 @@ drupal_add_library('system', 'ui.dialog');
 </map>
 
 
- */
+*/
+

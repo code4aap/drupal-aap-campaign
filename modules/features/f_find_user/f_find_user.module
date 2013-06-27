@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Find User feature.
+ */
+
+include_once 'f_find_user.features.inc';
