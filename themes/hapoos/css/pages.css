@@ -293,7 +293,7 @@ div.read-more a {
 /* line 258, ../sass/pages.scss */
 .main-content .inside {
   background: white;
-  padding-top: 1em;
+  /* padding-top: 1em; */
 }
 
 /* line 263, ../sass/pages.scss */

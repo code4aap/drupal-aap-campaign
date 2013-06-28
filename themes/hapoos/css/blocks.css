@@ -361,10 +361,10 @@ div.pane-connector-one-click-block #edit-oauthconnector-facebook::-moz-focus-inn
 /* line 146, ../sass/blocks.scss */
 div.sidebar-right-panel div.panel-separator,
 div.sidebar-left-panel div.panel-separator {
-  margin: 0 0 3em 0;
+  /* margin: 0 0 3em 0; */
 }
 
-/* line 157, ../sass/blocks.scss */
+/* line 154, ../sass/blocks.scss */
 div.sidebar-left-panel .view-content .views-row,
 div.sidebar-right-panel .view-content .views-row {
   margin-bottom: 10px;

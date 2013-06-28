@@ -1,0 +1,16 @@
+name = f_home_content_view
+description = Add block below and above the banner in home page
+core = 7.x
+package = Features
+version = 7.x-1.0
+project = f_home_content_view
+dependencies[] = flag
+dependencies[] = flag
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[flag][] = bookmarks
+features[flag][] = flag_content_banner_above
+features[flag][] = flag_content_banner_below
+features[views_view][] = home_page_content
+features_exclude[dependencies][ctools] = ctools

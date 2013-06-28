@@ -1,0 +1,10 @@
+/**
+ * @file
+ * companian file for panel.css file.
+ */
+/* line 10, ../sass/panel.scss */
+.panel-pane .pane-content .container-inline,
+.pane-block .pane-content .container-inline,
+.pane-search-form .pane-content .container-inline {
+  margin: 3%;
+}
