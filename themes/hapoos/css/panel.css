@@ -8,3 +8,8 @@
 .pane-search-form .pane-content .container-inline {
   margin: 3%;
 }
+
+/* line 16, ../sass/panel.scss */
+.home-content-above {
+  margin-top: 1%;
+}
