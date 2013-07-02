@@ -71,6 +71,7 @@ function aap_tweaks_menu() {
     'file' => 'aap_tweaks.pages.inc',
   );
 
+  return $items;
 }
 
 /**
