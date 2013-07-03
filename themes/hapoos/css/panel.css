@@ -13,3 +13,15 @@
 .home-content-above {
   margin-top: 1%;
 }
+
+/* line 21, ../sass/panel.scss */
+.facebook-likebox-div .pane-title {
+  font-size: .9em;
+  color: #3b5998;
+}
+
+/* line 28, ../sass/panel.scss */
+.twitter-likebox-div .pane-title {
+  font-size: .9em;
+  color: #019ad2;
+}
