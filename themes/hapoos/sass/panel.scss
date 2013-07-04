@@ -17,16 +17,11 @@
      margin-top: 1%;
     }
   
-   .facebook-likebox-div {
-        .pane-title {
-              font-size: .9em;
-              color: #3b5998;
-            }
-      }
-      
+   .facebook-likebox-div,
     .twitter-likebox-div {
         .pane-title {
-              font-size: .9em;
-              color: #019ad2;;
-            }
-      }        
+             display:none;
+              
+           }
+      }
+           
