@@ -1,0 +1,58 @@
+/**
+ * @file
+ * companian file for panel.css file.
+ */
+ 
+ .panel-pane,
+ .pane-block,
+ .pane-search-form {
+    .pane-content {
+        .container-inline {
+        margin: 3%;
+       } 
+    }
+ }
+ 
+  .home-content-above {
+     margin-top: 1%;
+    }
+  
+   .facebook-likebox-div,
+    .twitter-likebox-div {
+        .pane-title {
+             display:none;
+              
+           }
+      }
+        
+   .home_slideshow {
+      border: 2px solid;
+      border-radius: 1%;
+      border-color: rgb(52, 63, 83);
+     padding:0.8%;
+     background-color: rgb(23, 95, 129);
+     min-height:350px;
+   }   
+   
+   .transparency {
+          
+   }
+   
+   .mycontent {
+    a, h2 {
+        margin-bottom : 1%;
+        line-height : 1.0em;
+        color : white;
+        font-size: 1.0em
+        }
+   }
+   
+   .mycontent a:hover {
+        text-decoration: none;
+        color:rgb(247, 237, 8);
+       }
+   .aap-search-box input {
+        border: 1px solid #ccc;
+        padding: 4px 8px;
+        margin-bottom: 6px;
+   }     
