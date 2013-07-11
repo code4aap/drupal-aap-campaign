@@ -162,4 +162,3 @@ settings[zen_wireframes]           = 0
 ; the line below and see the documentation at: http://drupal.org/node/495654
 ;plugins[panels][layouts] = layouts
 
-plugins[advanced_forum][styles] = 'blue_lagoon_stacked'
