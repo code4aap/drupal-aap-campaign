@@ -23,6 +23,19 @@ function aap_tweaks_form_alter (&$form, &$form_state, $form_id) {
         array('!importer-link' => url('contact_importer'))) .
         '</div>';
   }
+  
+  // edit contact site form
+  if ($form_id == 'contact_site_form') {
+    $form['name']['#title'] = NULL;
+    $form['mail']['#title'] = NULL;
+    $form['message']['#title'] = NULL;
+    $form['name']['#size'] = 30;
+    $form['mail']['#size'] = 30;
+    $form['subject']['#access'] = FALSE;
+    $form['message']['#cols'] = 5;
+    $form['message']['#rows'] = 4;
+    $form['message']['#resizable'] = FALSE;
+  }
   return $form;
 }
 
