@@ -24,6 +24,13 @@ function aap_tweaks_form_alter (&$form, &$form_state, $form_id) {
         '</div>';
   }
   
+  // edit search form
+  if ($form_id == 'search_form') {
+    $form['basic']['keys']['#title'] = NULL;
+    $form['basic']['keys']['#attributes']['placeholder'] = t('Search our websites...');
+    $form['basic']['submit']['#value'] = '';
+
+  }
   // edit contact site form
   if ($form_id == 'contact_site_form') {
     $form['name']['#title'] = NULL;
@@ -35,7 +42,12 @@ function aap_tweaks_form_alter (&$form, &$form_state, $form_id) {
     $form['message']['#cols'] = 5;
     $form['message']['#rows'] = 4;
     $form['message']['#resizable'] = FALSE;
+    
+    $form['name']['#attributes']['placeholder'] = t('Name');
+    $form['mail']['#attributes']['placeholder'] = t('Mail');
+    $form['message']['#attributes']['placeholder'] = t('Comments/Suggestions');
   }
+  
   return $form;
 }
 
