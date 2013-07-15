@@ -46,6 +46,7 @@ function aap_tweaks_form_alter (&$form, &$form_state, $form_id) {
     $form['name']['#attributes']['placeholder'] = t('Name');
     $form['mail']['#attributes']['placeholder'] = t('Mail');
     $form['message']['#attributes']['placeholder'] = t('Comments/Suggestions');
+    $form['actions']['submit']['#value'] = t('Send');
   }
   
   return $form;
@@ -70,6 +71,72 @@ function aap_tweaks_node_view_alter(&$build) {
   }
 
 }
+
+
+/**
+ * Implements hook_block_info().
+ */
+ function aap_tweaks_block_info() {
+   $blocks = array();
+   $blocks['Donation_ Block'] = array('info' => t('Donation Block'), 'cache' => DRUPAL_NO_CACHE, );
+
+return $blocks;
+} 
+/**
+ * Implements hook_block_view().
+ */
+ function aap_tweaks_block_view($delta = '') {
+ //if (user_access('search content')) {
+$form = drupal_get_form('donation_block_form');
+$form = drupal_render($form);
+
+$block = array(
+  'subject' => t('Make a Donation'),
+  'content' => $form,
+);
+return $block;
+}
+
+/**
+ * Implements hook_forms().
+ */
+function donation_forms() {
+ $forms['donation_block_form']= array(
+   'callback' => 'donation_form',
+   'callback arguments' => array('donation_block_form'),
+ );
+return $forms;
+} 
+
+
+
+function donation_block_form($form, &$form_state) {
+
+  $list = array(
+    '0' => 'Rs.500',
+    '1' => 'Rs.2500',
+    '2' => 'Rs.5000',
+    '3' => 'Rs.10000',
+    '4' => 'Rs.15000',
+    '5' => 'Rs.20000',
+    '6' => 'Rs.25000',
+    '7' => 'Rs.Other',
+    );
+  $form['choice'] = array(
+    '#type' => 'radios',
+    '#title' => t('Contribute today and help to build a stronger party!'),
+    '#default_value' => -1,
+    '#options' => $list,
+  );
+
+  $form['donate'] = array(
+    '#type' => 'submit',
+    '#value' => t('Donate Now'),
+  );
+
+  return $form;
+} 
+
 
 /**
  * Implements hook_menu().
