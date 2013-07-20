@@ -69,6 +69,8 @@ function aap_tweaks_node_view_alter(&$build) {
       '#suffix' => '</div>',
       '#weight' => variable_get('disqus_weight', 50)-1,);
   }
+  
+  
 
 }
 
@@ -178,7 +180,15 @@ function aap_tweaks_theme() {
   );
 }
 
+/**
+ * Implements hook_hook_views_pre_render() .
+ */
 
+function aap_tweaks_views_pre_render(&$view) {
+	if ($view->name == 'home_page_content' && $view->current_display == 'sliding_news') {
+		drupal_add_js(drupal_get_path('module', 'aap_tweaks') . '/js/collapse_AAP_Question.js');
+	}
+}
 
 /* Below is the code that is used to generate the Delhi Constituency map
 
