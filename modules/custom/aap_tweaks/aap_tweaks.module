@@ -7,186 +7,215 @@
 /**
  * Implements hook_form_alter().
  */
-function aap_tweaks_form_alter (&$form, &$form_state, $form_id) {
-
-  // If we are on a node form and the setting for 'separate summary' is ON, do so.
-  if (!(strpos($form_id, 'node_form') === FALSE)) {
-    unset($form['body'][LANGUAGE_NONE][0]['summary']['#attached']);
-  }
-  if($form_id == "invite_form") {
-    $form['message']['#disabled'] = TRUE;
-    $form['email']['#description'] = 'Enter the e-mail addresses of the persons you would like to invite.
+function aap_tweaks_form_alter(&$form, &$form_state, $form_id) {
+	
+	// If we are on a node form and the setting for 'separate summary' is ON, do so.
+	if (! (strpos ( $form_id, 'node_form' ) === FALSE)) {
+		unset ( $form ['body'] [LANGUAGE_NONE] [0] ['summary'] ['#attached'] );
+	}
+	if ($form_id == "invite_form") {
+		$form ['message'] ['#disabled'] = TRUE;
+		$form ['email'] ['#description'] = 'Enter the e-mail addresses of the persons you would like to invite.
       To specify multiple recipients, enter one e-mail address per line or separate each address with a comma.
-      <div class="contact-importer-message">' .
-      t('You can also <a href=!importer-link class="contact-importer-link">import your ' .
-        'contacts from GMail, Yahoo!</a>',
-        array('!importer-link' => url('contact_importer'))) .
-        '</div>';
-  }
-  
-  // edit search form
-  if ($form_id == 'search_form') {
-    $form['basic']['keys']['#title'] = NULL;
-    $form['basic']['keys']['#attributes']['placeholder'] = t('Search our websites...');
-    $form['basic']['submit']['#value'] = '';
-
-  }
-  // edit contact site form
-  if ($form_id == 'contact_site_form') {
-    $form['name']['#title'] = NULL;
-    $form['mail']['#title'] = NULL;
-    $form['message']['#title'] = NULL;
-    $form['name']['#size'] = 30;
-    $form['mail']['#size'] = 30;
-    $form['subject']['#access'] = FALSE;
-    $form['message']['#cols'] = 5;
-    $form['message']['#rows'] = 4;
-    $form['message']['#resizable'] = FALSE;
-    
-    $form['name']['#attributes']['placeholder'] = t('Name');
-    $form['mail']['#attributes']['placeholder'] = t('Mail');
-    $form['message']['#attributes']['placeholder'] = t('Comments/Suggestions');
-    $form['actions']['submit']['#value'] = t('Send');
-  }
-  
-  return $form;
+      <div class="contact-importer-message">' . t ( 'You can also <a href=!importer-link class="contact-importer-link">import your ' . 'contacts from GMail, Yahoo!</a>', array (
+				'!importer-link' => url ( 'contact_importer' ) 
+		) ) . '</div>';
+	}
+	
+	// edit search form
+	if ($form_id == 'search_form') {
+		$form ['basic'] ['keys'] ['#title'] = NULL;
+		$form ['basic'] ['keys'] ['#attributes'] ['placeholder'] = t ( 'Search our websites...' );
+		$form ['basic'] ['submit'] ['#value'] = '';
+	}
+	// edit contact site form
+	if ($form_id == 'contact_site_form') {
+		$form ['name'] ['#title'] = NULL;
+		$form ['mail'] ['#title'] = NULL;
+		$form ['message'] ['#title'] = NULL;
+		$form ['name'] ['#size'] = 30;
+		$form ['mail'] ['#size'] = 30;
+		$form ['subject'] ['#access'] = FALSE;
+		$form ['message'] ['#cols'] = 5;
+		$form ['message'] ['#rows'] = 4;
+		$form ['message'] ['#resizable'] = FALSE;
+		
+		$form ['name'] ['#attributes'] ['placeholder'] = t ( 'Name' );
+		$form ['mail'] ['#attributes'] ['placeholder'] = t ( 'Mail' );
+		$form ['message'] ['#attributes'] ['placeholder'] = t ( 'Comments/Suggestions' );
+		$form ['actions'] ['submit'] ['#value'] = t ( 'Send' );
+	}
+	
+	// edit user login form
+	if ($form_id == 'search_form') {
+		global  $base_url;
+		
+		$contact_link = l ( 'Contact Us', $base_url . '/page/contact-us' );
+		$form ['contact_link'] = array (
+				'#prefix' => '<div id="aap-contact" class = "aap-header-content">' . $contact_link,
+				'#suffix' => '</div>',
+				'#weight' => -50, 
+		);
+		
+		$lang_option = array (
+				'0' => 'English' 
+		);
+		$form ['website_language'] = array (
+				'#prefix' => '<div class="aap-language aap-header-content">',
+				'#type' => 'select',
+				'#title' => t ( 'Language' ),
+				'#options' => $lang_option,
+				'#default_value' => array (0),
+				'#weight' => -48,
+				'#suffix' => '</div>',
+		);
+		
+		$login_link = l('Log In', $base_url . '/user');
+		
+		$form ['login_link'] = array (
+				'#prefix' => '<div class="aap-login aap-header-content">' . $login_link,
+				'#suffix' => '</div>'
+		);
+	}
+	return $form;
 }
 
 /**
  * Implements hook_node_view_alter().
  */
 function aap_tweaks_node_view_alter(&$build) {
-
-  if ($build['#view_mode'] == 'teaser' && isset($build['links']['disqus'])) {
-    unset($build['links']['disqus']);
-  }
-
-  // code for inserting block just above disqus comment
-  if (isset($build['disqus'])) {
-    $build['block'] = array(
-      '#prefix' => '<div class="service-links"><span style="color:blue">When expressing your views in the comments, please use clean and dignified language, even when you are expressing disagreement.
+	if ($build ['#view_mode'] == 'teaser' && isset ( $build ['links'] ['disqus'] )) {
+		unset ( $build ['links'] ['disqus'] );
+	}
+	
+	// code for inserting block just above disqus comment
+	if (isset ( $build ['disqus'] )) {
+		$build ['block'] = array (
+				'#prefix' => '<div class="service-links"><span style="color:blue">When expressing your views in the comments, please use clean and dignified language, even when you are expressing disagreement.
                                      Also, we encourage you to <b>Flag</b> any abusive or highly irrelevant comments. Thank you.</span>',
-      '#suffix' => '</div>',
-      '#weight' => variable_get('disqus_weight', 50)-1,);
-  }
-  
-  
-
+				'#suffix' => '</div>',
+				'#weight' => variable_get ( 'disqus_weight', 50 ) - 1 
+		);
+	}
 }
-
 
 /**
  * Implements hook_block_info().
  */
- function aap_tweaks_block_info() {
-   $blocks = array();
-   $blocks['Donation_ Block'] = array('info' => t('Donation Block'), 'cache' => DRUPAL_NO_CACHE, );
-
-return $blocks;
-} 
+function aap_tweaks_block_info() {
+	$blocks = array ();
+	$blocks ['Donation_ Block'] = array (
+			'info' => t ( 'Donation Block' ),
+			'cache' => DRUPAL_NO_CACHE 
+	);
+	$blocks ['aap_header'] = array (
+			'info' => t ( 'AAP Header Block' ),
+			'cache' => DRUPAL_NO_CACHE 
+	);
+	
+	return $blocks;
+}
 /**
  * Implements hook_block_view().
  */
- function aap_tweaks_block_view($delta = '') {
- //if (user_access('search content')) {
-$form = drupal_get_form('donation_block_form');
-$form = drupal_render($form);
-
-$block = array(
-  'subject' => t('Make a Donation'),
-  'content' => $form,
-);
-return $block;
+function aap_tweaks_block_view($delta = '') {
+	// if (user_access('search content')) {
+	$form = drupal_get_form ( 'donation_block_form' );
+	$form = drupal_render ( $form );
+	
+	$block = array (
+			'subject' => t ( 'Make a Donation' ),
+			'content' => $form 
+	);
+	return $block;
 }
 
 /**
  * Implements hook_forms().
  */
 function donation_forms() {
- $forms['donation_block_form']= array(
-   'callback' => 'donation_form',
-   'callback arguments' => array('donation_block_form'),
- );
-return $forms;
-} 
-
-
-
+	$forms ['donation_block_form'] = array (
+			'callback' => 'donation_form',
+			'callback arguments' => array (
+					'donation_block_form' 
+			) 
+	);
+	return $forms;
+}
 function donation_block_form($form, &$form_state) {
-
-  $list = array(
-    '0' => 'Rs.500',
-    '1' => 'Rs.2500',
-    '2' => 'Rs.5000',
-    '3' => 'Rs.10000',
-    '4' => 'Rs.15000',
-    '5' => 'Rs.20000',
-    '6' => 'Rs.25000',
-    '7' => 'Rs.Other',
-    );
-  $form['choice'] = array(
-    '#type' => 'radios',
-    '#title' => t('Contribute today and help to build a stronger party!'),
-    '#default_value' => -1,
-    '#options' => $list,
-  );
-
-  $form['donate'] = array(
-    '#type' => 'submit',
-    '#value' => t('Donate Now'),
-  );
-
-  return $form;
-} 
-
+	$list = array (
+			'0' => 'Rs.500',
+			'1' => 'Rs.2500',
+			'2' => 'Rs.5000',
+			'3' => 'Rs.10000',
+			'4' => 'Rs.15000',
+			'5' => 'Rs.20000',
+			'6' => 'Rs.25000',
+			'7' => 'Rs.Other' 
+	);
+	$form ['choice'] = array (
+			'#type' => 'radios',
+			'#title' => t ( 'Contribute today and help to build a stronger party!' ),
+			'#default_value' => - 1,
+			'#options' => $list 
+	);
+	
+	$form ['donate'] = array (
+			'#type' => 'submit',
+			'#value' => t ( 'Donate NOW' ) 
+	);
+	
+	return $form;
+}
 
 /**
  * Implements hook_menu().
  */
 function aap_tweaks_menu() {
-  $items['join-us'] = array(
-    'page callback' => 'aap_iframe_pages',
-    'access callback' => TRUE,
-    'file' => 'aap_tweaks.pages.inc',
-  );
-  $items['donate'] = array(
-    'page callback' => 'aap_iframe_pages',
-    'access callback' => TRUE,
-    'file' => 'aap_tweaks.pages.inc',
-  );
-  $items['talk-to-us'] = array(
-    'page callback' => 'aap_iframe_pages',
-    'access callback' => TRUE,
-    'file' => 'aap_tweaks.pages.inc',
-  );
-  $items['spread-message'] = array(
-    'page callback' => 'aap_iframe_pages',
-    'access callback' => TRUE,
-    'file' => 'aap_tweaks.pages.inc',
-  );
-
-  return $items;
+	$items ['join-us'] = array (
+			'page callback' => 'aap_iframe_pages',
+			'access callback' => TRUE,
+			'file' => 'aap_tweaks.pages.inc' 
+	);
+	$items ['donate'] = array (
+			'page callback' => 'aap_iframe_pages',
+			'access callback' => TRUE,
+			'file' => 'aap_tweaks.pages.inc' 
+	);
+	$items ['talk-to-us'] = array (
+			'page callback' => 'aap_iframe_pages',
+			'access callback' => TRUE,
+			'file' => 'aap_tweaks.pages.inc' 
+	);
+	$items ['spread-message'] = array (
+			'page callback' => 'aap_iframe_pages',
+			'access callback' => TRUE,
+			'file' => 'aap_tweaks.pages.inc' 
+	);
+	
+	return $items;
 }
 
 /**
  * Implements hook_theme().
  */
 function aap_tweaks_theme() {
-  return array(
-    'aap-iframe-page' => array(
-      'template' => 'aap-iframe-page',
-      'variables' => array('src' => NULL),
-    ),
-  );
+	return array (
+			'aap-iframe-page' => array (
+					'template' => 'aap-iframe-page',
+					'variables' => array (
+							'src' => NULL 
+					) 
+			) 
+	);
 }
 
 /**
  * Implements hook_hook_views_pre_render() .
  */
-
 function aap_tweaks_views_pre_render(&$view) {
 	if ($view->name == 'home_page_content' && $view->current_display == 'sliding_news') {
-		drupal_add_js(drupal_get_path('module', 'aap_tweaks') . '/js/collapse_AAP_Question.js');
+		drupal_add_js ( drupal_get_path ( 'module', 'aap_tweaks' ) . '/js/collapse_AAP_Question.js' );
 	}
 }
 
