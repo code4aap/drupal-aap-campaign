@@ -22,12 +22,6 @@ function aap_tweaks_form_alter(&$form, &$form_state, $form_id) {
 		) ) . '</div>';
 	}
 	
-	// edit search form
-	if ($form_id == 'search_form') {
-		$form ['basic'] ['keys'] ['#title'] = NULL;
-		$form ['basic'] ['keys'] ['#attributes'] ['placeholder'] = t ( 'Search our websites...' );
-		$form ['basic'] ['submit'] ['#value'] = '';
-	}
 	// edit contact site form
 	if ($form_id == 'contact_site_form') {
 		$form ['name'] ['#title'] = NULL;
@@ -47,7 +41,11 @@ function aap_tweaks_form_alter(&$form, &$form_state, $form_id) {
 	}
 	
 	// edit user login form
-	if ($form_id == 'search_form') {
+	if ($form_id == 'search_block_form') {
+		
+		$form['actions']['submit']['#value'] = '';
+		$form['search_block_form']['#attributes']['placeholder'] = t ( 'Search our websites...' );
+		unset($form['search_block_form']['#attributes']['title']);
 		global  $base_url;
 		
 		$contact_link = l ( 'Contact Us', $base_url . '/page/contact-us' );
@@ -74,8 +72,10 @@ function aap_tweaks_form_alter(&$form, &$form_state, $form_id) {
 		
 		$form ['login_link'] = array (
 				'#prefix' => '<div class="aap-login aap-header-content">' . $login_link,
-				'#suffix' => '</div>'
+				'#suffix' => '</div>',
+				'#weight' => 500,
 		);
+		
 	}
 	return $form;
 }
