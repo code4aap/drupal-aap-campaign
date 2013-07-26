@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the System Variable feature.
+ */
+
+include_once 'f_system_variable.features.inc';

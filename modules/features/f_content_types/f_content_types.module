@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Content Types feature.
+ */
+
+include_once 'f_content_types.features.inc';

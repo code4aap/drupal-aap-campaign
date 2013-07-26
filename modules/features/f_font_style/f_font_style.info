@@ -1,0 +1,15 @@
+name = Font Style
+description = Added New font style
+core = 7.x
+package = AAP New Theme
+php = 5.2.4
+version = 7.x-1.0
+project = f_font_style
+dependencies[] = ctools
+dependencies[] = features
+dependencies[] = fontyourface
+dependencies[] = local_fonts
+dependencies[] = strongarm
+features[ctools][] = strongarm:strongarm:1
+features[features_api][] = api:1
+features[fontyourface][] = Franklin Gothic Demi Cond normal normal
