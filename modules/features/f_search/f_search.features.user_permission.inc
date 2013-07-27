@@ -15,6 +15,7 @@ function f_search_user_default_permissions() {
     'name' => 'administer search',
     'roles' => array(
       'AAP Editor' => 'AAP Editor',
+      'Administrator' => 'Administrator',
       'Content Approver' => 'Content Approver',
       'Party Leardership' => 'Party Leardership',
     ),
@@ -25,6 +26,7 @@ function f_search_user_default_permissions() {
   $permissions['search content'] = array(
     'name' => 'search content',
     'roles' => array(
+      'Administrator' => 'Administrator',
       'anonymous user' => 'anonymous user',
       'authenticated user' => 'authenticated user',
     ),
@@ -34,7 +36,9 @@ function f_search_user_default_permissions() {
   // Exported permission: use advanced search.
   $permissions['use advanced search'] = array(
     'name' => 'use advanced search',
-    'roles' => array(),
+    'roles' => array(
+      'Administrator' => 'Administrator',
+    ),
     'module' => 'search',
   );
 

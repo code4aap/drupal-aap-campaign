@@ -2,6 +2,7 @@ name = Layout and content
 description = Layout and content
 core = 7.x
 package = AAP Features
+php = 5.2.4
 version = 7.x-1.0
 project = f_layout_and_content
 dependencies[] = ctools

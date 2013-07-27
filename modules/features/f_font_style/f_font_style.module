@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Font Style feature.
+ */
+
+include_once 'f_font_style.features.inc';

@@ -31,8 +31,8 @@ function f_search_strongarm() {
   $strongarm->value = array(
     'solr' => array(
       'node' => array(
-        'last_changed' => '1368176700',
-        'last_entity_id' => '152',
+        'last_changed' => '1369187199',
+        'last_entity_id' => '157',
       ),
       'og_membership_type' => array(
         'last_changed' => 0,
@@ -79,7 +79,7 @@ function f_search_strongarm() {
   $strongarm->api_version = 1;
   $strongarm->name = 'apachesolr_index_updated';
   $strongarm->value = array(
-    'solr' => 1368255601,
+    'solr' => 1369387429,
   );
   $export['apachesolr_index_updated'] = $strongarm;
 
@@ -87,7 +87,7 @@ function f_search_strongarm() {
   $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
   $strongarm->api_version = 1;
   $strongarm->name = 'apachesolr_last_optimize';
-  $strongarm->value = 1368223202;
+  $strongarm->value = 1369299601;
   $export['apachesolr_last_optimize'] = $strongarm;
 
   $strongarm = new stdClass();
@@ -160,13 +160,6 @@ function f_search_strongarm() {
   $strongarm->name = 'search_default_module';
   $strongarm->value = 'apachesolr_search';
   $export['search_default_module'] = $strongarm;
-
-  $strongarm = new stdClass();
-  $strongarm->disabled = FALSE; /* Edit this to true to make a default strongarm disabled initially */
-  $strongarm->api_version = 1;
-  $strongarm->name = 'twitter_search';
-  $strongarm->value = 'http://search.twitter.com';
-  $export['twitter_search'] = $strongarm;
 
   return $export;
 }

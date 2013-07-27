@@ -1,7 +1,0 @@
-<?php
-/**
- * @file
- * Code for the f_home_content_view feature.
- */
-
-include_once 'f_home_content_view.features.inc';
