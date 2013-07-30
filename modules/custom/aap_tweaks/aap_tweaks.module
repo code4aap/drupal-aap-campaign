@@ -8,7 +8,6 @@
  * Implements hook_form_alter().
  */
 function aap_tweaks_form_alter(&$form, &$form_state, $form_id) {
-	
 	// If we are on a node form and the setting for 'separate summary' is ON, do so.
 	if (! (strpos ( $form_id, 'node_form' ) === FALSE)) {
 		unset ( $form ['body'] [LANGUAGE_NONE] [0] ['summary'] ['#attached'] );
@@ -75,8 +74,8 @@ function aap_tweaks_form_alter(&$form, &$form_state, $form_id) {
 				'#suffix' => '</div>',
 				'#weight' => 500,
 		);
-		
 	}
+	
 	return $form;
 }
 
@@ -142,31 +141,60 @@ function donation_forms() {
 	);
 	return $forms;
 }
+
+/**
+ * Create donatin form block
+ */
 function donation_block_form($form, &$form_state) {
 	$list = array (
-			'0' => 'Rs.500',
-			'1' => 'Rs.2500',
-			'2' => 'Rs.5000',
-			'3' => 'Rs.10000',
-			'4' => 'Rs.15000',
-			'5' => 'Rs.20000',
-			'6' => 'Rs.25000',
-			'7' => 'Rs.Other' 
+			'500' => 'Rs.500',
+			'2500' => 'Rs.2500',
+			'5000' => 'Rs.5000',
+			'10000' => 'Rs.10000',
+			'15000' => 'Rs.15000',
+			'20000' => 'Rs.20000',
+			'25000' => 'Rs.25000',
+			'0' => 'Rs.Other' 
 	);
 	$form ['choice'] = array (
 			'#type' => 'radios',
 			'#title' => t ( 'Contribute today and help to build a stronger party!' ),
 			'#default_value' => - 1,
-			'#options' => $list 
+			'#options' => $list,
+			'#validated' => TRUE,
 	);
 	
 	$form ['donate'] = array (
 			'#type' => 'submit',
-			'#value' => t ( 'Donate NOW' ) 
+			'#value' => t ( 'Donate NOW' ),
 	);
 	
 	return $form;
 }
+
+/**
+ * Submit handler for donation block form
+ */
+function donation_block_form_validate(&$form, &$form_state) {
+	$select_value = $form_state['values']['choice'];
+	if ($select_value == -1) {
+			form_set_error('choice', t('Please select a suitable donation amount'));
+	}
+}
+/**
+ * Submit handler for donation block form
+ */
+function donation_block_form_submit(&$form, &$form_state) {
+	$select_value = $form_state['values']['choice'];
+	if ($select_value == '0') {
+		$para = NULL;
+	}
+	else {
+		$para = $select_value;
+	}
+	drupal_goto('https://donate.aamaadmiparty.org/?utm_source=nsd&utm_medium=email&utm_term=sub1&utm_content=c1&utm_campaign=cam1$amt=' . $para);
+}
+
 
 /**
  * Implements hook_menu().
