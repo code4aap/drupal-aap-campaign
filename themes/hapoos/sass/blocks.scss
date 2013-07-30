@@ -144,14 +144,12 @@ div.pane-connector-one-click-block {
 div.sidebar-right-panel, 
 div.sidebar-left-panel {
   div.panel-separator {
-    margin: 0 0 3em 0;
+   /* margin: 0 0 3em 0; */
   }
-	
-	
-	
 }
 
-div.sidebar-left-panel {
+div.sidebar-left-panel,
+div.sidebar-right-panel {
 		.view-content {
 			.views-row {
 				margin-bottom:10px;

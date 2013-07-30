@@ -41,6 +41,7 @@
 
 .form-submit { /* The submit button */
   @include sassy-button("flat", 4px, 1em, #ebb22f, #ebb22f, black);
+  padding: 0.3em 1.0em;
 }
 
 .container-inline {
@@ -149,4 +150,20 @@ form {
 
 td.menu-disabled {
   background: #ccc;
+}
+
+
+.btn-red, 
+a .btn-red,
+a:link .btn-red,
+a:hover .btn-red {
+  @include sassy-button("flat", 4px, 1em, #d2232a);
+  color: white !important;
+}
+.btn-blue, 
+a .btn-blue,
+a:link .btn-blue,
+a:hover .btn-blue {
+  @include sassy-button("flat", 4px, 1em, #3b5a9b);
+  color: white !important;
 }

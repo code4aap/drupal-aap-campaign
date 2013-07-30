@@ -62,7 +62,7 @@ function f_search_menu_default_menu_links() {
     'module' => 'system',
     'hidden' => '0',
     'external' => '0',
-    'has_children' => '1',
+    'has_children' => '0',
     'expanded' => '0',
     'weight' => '0',
     'parent_path' => 'admin/config/search',
@@ -124,26 +124,11 @@ function f_search_menu_default_menu_links() {
     'weight' => '0',
     'parent_path' => 'admin/reports',
   );
-  // Exported menu link: navigation:search
-  $menu_links['navigation:search'] = array(
-    'menu_name' => 'navigation',
-    'link_path' => 'search',
-    'router_path' => 'search',
-    'link_title' => 'Search',
-    'options' => array(),
-    'module' => 'system',
-    'hidden' => '1',
-    'external' => '0',
-    'has_children' => '0',
-    'expanded' => '0',
-    'weight' => '0',
-  );
   // Translatables
   // Included for use with string extractors like potx.
   t('Apache Solr search');
   t('Apache Solr search index');
   t('Current search blocks');
-  t('Search');
   t('Search and metadata');
   t('Search settings');
   t('Top search phrases');

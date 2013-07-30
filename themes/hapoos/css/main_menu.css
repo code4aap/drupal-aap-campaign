@@ -1,7 +1,7 @@
 /* line 2, ../sass/main_menu.scss */
 .sf-menu.sf-style-default a, .sf-menu.sf-style-default a:visited {
   color: #000;
-  font-size: 1.3em;
+  font-size: 1.0em;
 }
 
 /* line 7, ../sass/main_menu.scss */
@@ -26,12 +26,12 @@
 
 /* line 24, ../sass/main_menu.scss */
 .sf-menu.sf-style-default li li, .sf-menu.sf-style-default li li:hover, .sf-menu.sf-style-default li li.sfHover {
-  background: none repeat scroll 0 0 #ebb22f;
+  background: none repeat scroll 0 0 #EBB22F;
 }
 
 /* line 28, ../sass/main_menu.scss */
 .sf-menu.sf-style-default li li li, .sf-menu.sf-style-default li li li:hover {
-  background: none repeat scroll 0 0 #ebb22f;
+  background: none repeat scroll 0 0 #EBB22F;
 }
 
 /* line 33, ../sass/main_menu.scss */
@@ -58,7 +58,7 @@
 
 /* line 57, ../sass/main_menu.scss */
 #disqus_thread {
-  border-top: 1px solid #cccccc;
+  border-top: 1px solid #ccc;
   padding: 10px;
   margin-top: 26px;
   margin-bottom: 20px;

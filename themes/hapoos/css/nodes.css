@@ -63,9 +63,9 @@
 /* line 52, ../sass/nodes.scss */
 .node-teaser {
   /* A node displayed as teaser */
-  padding-bottom: 2em;
+  /* padding-bottom: 2em; */
   border-bottom: 1px dashed #ccc;
-  margin-bottom: 2em;
+  /* margin-bottom: 2em; */
 }
 /* line 57, ../sass/nodes.scss */
 .node-teaser .node-title {

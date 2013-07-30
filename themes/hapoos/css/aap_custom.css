@@ -1,0 +1,52 @@
+/**
+ * @file
+ * companian file for panel.css file.
+ */
+/* line 10, ../sass/aap_custom.scss */
+.panel-pane .pane-content .container-inline,
+.pane-block .pane-content .container-inline,
+.pane-search-form .pane-content .container-inline {
+  margin: 3%;
+}
+
+/* line 16, ../sass/aap_custom.scss */
+.home-content-above {
+  margin-top: 1%;
+}
+
+/* line 22, ../sass/aap_custom.scss */
+.facebook-likebox-div .pane-title,
+.twitter-likebox-div .pane-title {
+  display: none;
+}
+
+/* line 28, ../sass/aap_custom.scss */
+.home_slideshow {
+  border: 2px solid;
+  border-radius: 1%;
+  border-color: #343f53;
+  padding: 0.8%;
+  background-color: #175f81;
+  min-height: 350px;
+}
+
+/* line 42, ../sass/aap_custom.scss */
+.mycontent a, .mycontent h2 {
+  margin-bottom: 1%;
+  line-height: 1.0em;
+  color: white;
+  font-size: 1em;
+}
+
+/* line 50, ../sass/aap_custom.scss */
+.mycontent a:hover {
+  text-decoration: none;
+  color: #f7ed08;
+}
+
+/* line 54, ../sass/aap_custom.scss */
+.aap-search-box input {
+  border: 1px solid #ccc;
+  padding: 4px 8px;
+  margin-bottom: 6px;
+}

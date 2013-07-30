@@ -93,6 +93,7 @@ function f_search_apachesolr_environments() {
       3 => 'group',
       4 => 'news',
       5 => 'poll',
+      6 => 'volunteer_story',
     ),
   );
   $export['solr'] = $environment;

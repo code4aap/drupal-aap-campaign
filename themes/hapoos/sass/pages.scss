@@ -257,7 +257,7 @@ div.read-more a {
     background: #d8ddf2;
     .inside {
       background: white;
-      padding-top: 1em;
+      padding-top: 0.3%;
     }
   }
   .panels-row-pre-footer {
@@ -299,4 +299,9 @@ div.read-more a {
   }
   .panels-flexible-region-inside-last {
     padding-right: 1em;
+  }
+
+  .panels-row-main-menu, .panels-row-main-menu .inside {
+      overflow-x: visible !important;
+      overflow-y: visible !important;
   }

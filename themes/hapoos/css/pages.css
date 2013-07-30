@@ -293,7 +293,7 @@ div.read-more a {
 /* line 258, ../sass/pages.scss */
 .main-content .inside {
   background: white;
-  padding-top: 1em;
+  /* padding-top: 1em; */
 }
 
 /* line 263, ../sass/pages.scss */
@@ -349,4 +349,10 @@ div.sidebar-right-panel {
 /* line 300, ../sass/pages.scss */
 .panels-flexible-region-inside-last {
   padding-right: 1em;
+}
+
+/* line 304, ../sass/pages.scss */
+.panels-row-main-menu, .panels-row-main-menu .inside {
+  overflow-x: visible !important;
+  overflow-y: visible !important;
 }
