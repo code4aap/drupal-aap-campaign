@@ -164,35 +164,12 @@ function donation_block_form($form, &$form_state) {
 			'#validated' => TRUE,
 	);
 	
-	$form ['donate'] = array (
-			'#type' => 'submit',
-			'#value' => t ( 'Donate NOW' ),
+	$donation_link =  l('Donate Now', 'https://donate.aamaadmiparty.org');
+	$form['link'] = array(
+		'#prefix' => '<div class = "donate-link">' . $donation_link,
+		'#suffix' => '</div>',	
 	);
-	
 	return $form;
-}
-
-/**
- * Submit handler for donation block form
- */
-function donation_block_form_validate(&$form, &$form_state) {
-	$select_value = $form_state['values']['choice'];
-	if ($select_value == -1) {
-			form_set_error('choice', t('Please select a suitable donation amount'));
-	}
-}
-/**
- * Submit handler for donation block form
- */
-function donation_block_form_submit(&$form, &$form_state) {
-	$select_value = $form_state['values']['choice'];
-	if ($select_value == '0') {
-		$para = NULL;
-	}
-	else {
-		$para = $select_value;
-	}
-	drupal_goto('https://donate.aamaadmiparty.org/?utm_source=nsd&utm_medium=email&utm_term=sub1&utm_content=c1&utm_campaign=cam1$amt=' . $para);
 }
 
 
