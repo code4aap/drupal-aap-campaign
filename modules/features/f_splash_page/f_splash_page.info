@@ -1,0 +1,11 @@
+name = splash_page
+description = Create a custom page, used in splashify module
+core = 7.x
+package = Other Site Functionality
+version = 7.x-1.0
+project = f_splash_page
+dependencies[] = ctools
+dependencies[] = page_manager
+features[ctools][] = page_manager:pages_default:1
+features[features_api][] = api:1
+features[page_manager_pages][] = splash
