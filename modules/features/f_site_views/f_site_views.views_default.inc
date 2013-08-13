@@ -358,7 +358,7 @@ if (!empty($np[1])) {
   $handler->display->display_options['fields']['field_answer']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_answer']['type'] = 'text_trimmed';
   $handler->display->display_options['fields']['field_answer']['settings'] = array(
-    'trim_length' => '100',
+    'trim_length' => '10',
   );
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
@@ -445,13 +445,6 @@ if (!empty($np[1])) {
   $handler->display->display_options['arguments']['field_content_tags_tid']['field'] = 'field_content_tags_tid';
   $handler->display->display_options['arguments']['field_content_tags_tid']['default_argument_type'] = 'fixed';
   $handler->display->display_options['arguments']['field_content_tags_tid']['summary']['format'] = 'default_summary';
-  /* Filter criterion: Content: Published */
-  $handler->display->display_options['filters']['status']['id'] = 'status';
-  $handler->display->display_options['filters']['status']['table'] = 'node';
-  $handler->display->display_options['filters']['status']['field'] = 'status';
-  $handler->display->display_options['filters']['status']['value'] = 1;
-  $handler->display->display_options['filters']['status']['group'] = 1;
-  $handler->display->display_options['filters']['status']['expose']['operator'] = FALSE;
 
   /* Display: News */
   $handler = $view->new_display('page', 'News', 'page_1');
@@ -686,6 +679,21 @@ if (!empty($np[1])) {
     'title' => 'left',
   );
   $handler->display->display_options['defaults']['row_options'] = FALSE;
+  $handler->display->display_options['defaults']['header'] = FALSE;
+  /* Header: Global: PHP */
+  $handler->display->display_options['header']['php']['id'] = 'php';
+  $handler->display->display_options['header']['php']['table'] = 'views';
+  $handler->display->display_options['header']['php']['field'] = 'php';
+  $handler->display->display_options['header']['php']['php_output'] = '<?php 
+
+       $fid = variable_get(\'news_image\');
+	$img_path = array(
+			\'path\' =>
+	file_load($fid)->uri);
+	$img = theme_image($img_path);
+print $img;
+?>
+';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Title */
   $handler->display->display_options['fields']['title']['id'] = 'title';
