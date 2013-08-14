@@ -175,9 +175,9 @@ function donation_block_form($form, &$form_state) {
 
 function aap_tweaks_permission()  {
 	return array(
-			'aap_configuration' => array(
-					'title' => t('AAP Configuration'),
-					'description' => t('Can change the configuration related to AAP site')),
+			'manage aap custom tweaks' => array(
+					'title' => t('Manage AAP custom tweaks'),
+					'description' => t('Can Manage AAP custom tweaks')),
 			);
 }			
 
@@ -206,10 +206,10 @@ function aap_tweaks_menu() {
 			'file' => 'aap_tweaks.pages.inc' 
 	);
 	
-	$items['admin/config/aap_config'] = array(
+	$items['admin/config/aap_tweaks'] = array(
 			'title' => 'News Image',
 			'type' => MENU_LOCAL_TASK,
-			'access callback' => array('AAP_config_permssion'),
+			'access arguments' => array('manage aap custom tweaks'),
 			'page callback' => 'drupal_get_form',
 			'page arguments' => array('AAP_config_form'),
 	);
@@ -217,11 +217,6 @@ function aap_tweaks_menu() {
 }
 
 
-function AAP_config_permssion() {
-	$authorised = FALSE;
-	$authorised = user_access('aap_configuration');
-	return $authorised;
-}
 /**
  * Create form of AAP_config_form
  */

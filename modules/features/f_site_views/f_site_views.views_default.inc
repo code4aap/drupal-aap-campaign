@@ -680,6 +680,9 @@ if (!empty($np[1])) {
   );
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['header'] = FALSE;
+  
+  //We need show admin selected image in the news view as mentioned -> https://github.com/code4aap/drupal-aap-campaign/issues/116
+  // The settings for it can be found here - [site name]/admin/config/aap_tweaks
   /* Header: Global: PHP */
   $handler->display->display_options['header']['php']['id'] = 'php';
   $handler->display->display_options['header']['php']['table'] = 'views';
