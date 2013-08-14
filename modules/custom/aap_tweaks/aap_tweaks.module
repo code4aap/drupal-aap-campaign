@@ -173,6 +173,14 @@ function donation_block_form($form, &$form_state) {
 }
 
 
+function aap_tweaks_permission()  {
+	return array(
+			'aap_configuration' => array(
+					'title' => t('AAP Configuration'),
+					'description' => t('Can change the configuration related to AAP site')),
+			);
+}			
+
 /**
  * Implements hook_menu().
  */
@@ -198,9 +206,39 @@ function aap_tweaks_menu() {
 			'file' => 'aap_tweaks.pages.inc' 
 	);
 	
+	$items['admin/config/aap_config'] = array(
+			'title' => 'News Image',
+			'type' => MENU_LOCAL_TASK,
+			'access callback' => array('AAP_config_permssion'),
+			'page callback' => 'drupal_get_form',
+			'page arguments' => array('AAP_config_form'),
+	);
 	return $items;
 }
 
+
+function AAP_config_permssion() {
+	$authorised = FALSE;
+	$authorised = user_access('aap_configuration');
+	return $authorised;
+}
+/**
+ * Create form of AAP_config_form
+ */
+
+function AAP_config_form ($form, &$form_status) {
+	$form = array();
+	
+	$form['news_image'] = array(
+			'#type' => 'textfield',
+			'#size' => 30,
+			'#title' => 'Enter FID',
+			'#defalut_value' => variable_get('news_image'),
+			'#description' => t('Fill file id (FID) of image, which you want to show above the news block in home page'),
+	);
+	
+	return system_settings_form($form);
+}
 /**
  * Implements hook_theme().
  */
@@ -216,7 +254,7 @@ function aap_tweaks_theme() {
 }
 
 /**
- * Implements hook_hook_views_pre_render() .
+ * Implements hook_views_pre_render() .
  */
 function aap_tweaks_views_pre_render(&$view) {
 	if ($view->name == 'home_page_content' && $view->current_display == 'sliding_news') {

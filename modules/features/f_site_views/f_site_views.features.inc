@@ -47,11 +47,11 @@ function f_site_views_flag_default_flags() {
     'show_on_teaser' => 1,
     'show_contextual_link' => FALSE,
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 'f_site_views',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   // Exported flag: "Show in Banner".
   $flags['show_in_banner'] = array(
