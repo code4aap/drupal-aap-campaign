@@ -5,6 +5,27 @@
  */
 
 /**
+ * Implements hook_init
+ */
+function aap_tweaks_init() {
+	
+	// Make our splash settings variables available to our JavaScript.
+	
+	$survey_delay = variable_get('survey_delay',6000);
+	$js_settings = array(
+			'survey_delay' => $survey_delay,
+			
+	);
+	
+	drupal_add_js(array('aap_tweaks' => $js_settings), array(
+	'type' => 'setting',
+	'cache' => TRUE,
+	'weight' => -100,
+	'every_page' => TRUE,
+	));
+}
+
+/**
  * Implements hook_form_alter().
  */
 function aap_tweaks_form_alter(&$form, &$form_state, $form_id) {
@@ -228,8 +249,16 @@ function AAP_config_form ($form, &$form_status) {
 			'#type' => 'textfield',
 			'#size' => 30,
 			'#title' => 'Enter FID',
-			'#defalut_value' => variable_get('news_image'),
+			'#default_value' => t(variable_get('news_image',122)),
 			'#description' => t('Fill file id (FID) of image, which you want to show above the news block in home page'),
+	);
+	
+	$form['survey_delay'] = array(
+			'#type' => 'textfield',
+			'#size' => 30,
+			'#title' => 'Enter Survey delay',
+			'#default_value' => t(variable_get('survey_delay',6000)),
+			'#description' => t('Enter time in miliseconds'),
 	);
 	
 	return system_settings_form($form);
