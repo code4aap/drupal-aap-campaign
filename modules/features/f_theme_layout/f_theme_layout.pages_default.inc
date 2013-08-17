@@ -70,12 +70,12 @@ function f_theme_layout_default_page_manager_handlers() {
     $pane->pid = 'new-1';
     $pane->panel = 'footer_1';
     $pane->type = 'block';
-    $pane->subtype = 'poll-recent';
+    $pane->subtype = 'advpoll-advpoll_recent';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
-      'override_title_text' => '',
+      'override_title' => 1,
+      'override_title_text' => 'Poll',
     );
     $pane->cache = array();
     $pane->style = array(
