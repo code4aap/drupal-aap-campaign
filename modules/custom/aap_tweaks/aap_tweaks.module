@@ -228,7 +228,7 @@ function aap_tweaks_menu() {
 	);
 	
 	$items['admin/config/aap_tweaks'] = array(
-			'title' => 'News Image',
+			'title' => 'AAP Configuration',
 			'type' => MENU_LOCAL_TASK,
 			'access arguments' => array('manage aap custom tweaks'),
 			'page callback' => 'drupal_get_form',
