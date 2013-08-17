@@ -133,7 +133,7 @@ function f_theme_layout_default_panels_mini() {
     $pane->pid = 'new-2';
     $pane->panel = 'footer_1';
     $pane->type = 'block';
-    $pane->subtype = 'menu-menu-footer-1';
+    $pane->subtype = 'menu-menu-donate';
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
@@ -475,7 +475,10 @@ function f_theme_layout_default_panels_mini() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => '',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
