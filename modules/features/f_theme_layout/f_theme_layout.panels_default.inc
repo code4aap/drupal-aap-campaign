@@ -176,7 +176,7 @@ function f_theme_layout_default_panels_mini() {
     $pane->panel = 'footer_3';
     $pane->type = 'contact';
     $pane->subtype = 'contact';
-    $pane->shown = TRUE;
+    $pane->shown = FALSE;
     $pane->access = array();
     $pane->configuration = array(
       'override_title' => 1,
