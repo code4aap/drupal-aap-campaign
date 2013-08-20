@@ -5,117 +5,224 @@
 # server.
 # 
 backend default {
-    .host = "10.148.2.170";
-    .port = "8080";
+    .host = "127.0.0.1";
+    .port = "80";
 }
+
+ 
+# Respond to incoming requests.
+sub vcl_recv {
+  # Use anonymous, cached pages if all backends are down.
+  if (!req.backend.healthy) {
+    unset req.http.Cookie;
+  }
+ 
+  # Allow the backend to serve up stale content if it is responding slowly.
+  set req.grace = 6h;
+ 
+  # Pipe these paths directly to Apache for streaming.
+  # NOTE: AAP sites are not using this now
+  #if (req.url ~ "^/admin/content/backup_migrate/export") {
+  #  return (pipe);
+  #}
+ 
+  # TODO: Understand how this works and comment
+  if (req.restarts == 0) {
+    if (req.http.x-forwarded-for) {
+      set req.http.X-Forwarded-For = req.http.X-Forwarded-For + ", " + client.ip;
+    }
+    else {
+      set req.http.X-Forwarded-For = client.ip;
+    }
+  }
+ 
+  # Do not cache these paths.
+  if (req.url ~ "^/status\.php$" ||
+      req.url ~ "^/update\.php$" ||
+      req.url ~ "^/admin$" ||
+      req.url ~ "^/admin/.*$" ||
+      req.url ~ "^/flag/.*$" ||
+      req.url ~ "^.*/ajax/.*$" ||
+      req.url ~ "^.*/ahah/.*$") {
+       return (pass);
+  }
+
+  # Handle compression correctly. Different browsers send different
+  # "Accept-Encoding" headers, even though they mostly all support the same
+  # compression mechanisms. By consolidating these compression headers into
+  # a consistent format, we can reduce the size of the cache and get more hits.=
+  # @see: http:// varnish.projects.linpro.no/wiki/FAQ/Compression
+  if (req.http.Accept-Encoding) {
+    if (req.http.Accept-Encoding ~ "gzip") {
+      # If the browser supports it, we'll use gzip.
+      set req.http.Accept-Encoding = "gzip";
+    }
+    else if (req.http.Accept-Encoding ~ "deflate") {
+      # Next, try deflate if it is supported.
+      set req.http.Accept-Encoding = "deflate";
+    }
+    else {
+      # Unknown algorithm. Remove it and send unencoded.
+      unset req.http.Accept-Encoding;
+    }
+  }
+ 
+  # Do not allow outside access to cron.php or install.php.
+  # NOTE: This is not important for AAP sites right now.
+  #if (req.url ~ "^/(cron|install)\.php$" && !client.ip ~ internal) {
+    # Have Varnish throw the error directly.
+  #  error 404 "Page not found.";
+    # Use a custom error page that you've defined in Drupal at the path "404".
+    # set req.url = "/404";
+  #}
+ 
+  # Always cache the following file types for all users. This list of extensions
+  # appears twice, once here and again in vcl_fetch so make sure you edit both
+  # and keep them equal.
+  if (req.url ~ "(?i)\.(pdf|asc|dat|txt|doc|xls|ppt|tgz|csv|png|gif|jpeg|jpg|ico|swf|css|js)(\?.*)?$") {
+    unset req.http.Cookie;
+  }
+ 
+  # Remove all cookies that Drupal doesn't need to know about. We explicitly
+  # list the ones that Drupal does need, the SESS and NO_CACHE. If, after
+  # running this code we find that either of these two cookies remains, we
+  # will pass as the page cannot be cached.
+  if (req.http.Cookie) {
+    # 1. Append a semi-colon to the front of the cookie string.
+    # 2. Remove all spaces that appear after semi-colons.
+    # 3. Match the cookies we want to keep, adding the space we removed
+    #    previously back. (\1) is first matching group in the regsuball.
+    # 4. Remove all other cookies, identifying them by the fact that they have
+    #    no space after the preceding semi-colon.
+    # 5. Remove all spaces and semi-colons from the beginning and end of the
+    #    cookie string.
+    set req.http.Cookie = ";" + req.http.Cookie;
+    set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");   
+    set req.http.Cookie = regsuball(req.http.Cookie, ";(SESS[a-z0-9]+|SSESS[a-z0-9]+|NO_CACHE)=", "; \1=");
+    set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
+    set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
+ 
+    if (req.http.Cookie == "") {
+      # If there are no remaining cookies, remove the cookie header. If there
+      # aren't any cookie headers, Varnish's default behavior will be to cache
+      # the page.
+      unset req.http.Cookie;
+    }
+    else {
+      # If there is any cookies left (a session or NO_CACHE cookie), do not
+      # cache the page. Pass it on to Apache directly.
+      return (pass);
+    }
+  }
+}
+
+# Set a header to track a cache HIT/MISS.
+sub vcl_deliver {
+  if (obj.hits > 0) {
+    set resp.http.X-Varnish-Cache = "HIT";
+  }
+  else {
+    set resp.http.X-Varnish-Cache = "MISS";
+  }
+}
+
+# Code determining what to do when serving items from the Apache servers.
+# beresp == Back-end response from the web server.
+sub vcl_fetch {
+  # We need this to cache 404s, 301s, 500s. Otherwise, depending on backend but
+  # definitely in Drupal's case these responses are not cacheable by default.
+  if (beresp.status == 404 || beresp.status == 301 || beresp.status == 500) {
+    set beresp.ttl = 10m;
+  }
+ 
+  # Don't allow static files to set cookies.
+  # (?i) denotes case insensitive in PCRE (perl compatible regular expressions).
+  # This list of extensions appears twice, once here and again in vcl_recv so
+  # make sure you edit both and keep them equal.
+  if (req.url ~ "(?i)\.(pdf|asc|dat|txt|doc|xls|ppt|tgz|csv|png|gif|jpeg|jpg|ico|swf|css|js)(\?.*)?$") {
+    unset beresp.http.set-cookie;
+  }
+ 
+  # Allow items to be stale if needed.
+  set beresp.grace = 6h;
+}
+
+ 
+# In the event of an error, show friendlier messages.
+sub vcl_error {
+  # Redirect to some other URL in the case of a homepage failure.
+  #if (req.url ~ "^/?$") {
+  #  set obj.status = 302;
+  #  set obj.http.Location = "http://backup.example.com/";
+  #}
+ 
+  # Otherwise redirect to the homepage, which will likely be in the cache.
+  set obj.http.Content-Type = "text/html; charset=utf-8";
+  synthetic {"
+<html>
+<head>
+  <title>Page Unavailable</title>
+  <style>
+    body { background: #303030; text-align: center; color: white; }
+    #page { border: 1px solid #CCC; width: 500px; margin: 100px auto 0; padding: 30px; background: #323232; }
+    a, a:link, a:visited { color: #CCC; }
+    .error { color: #222; }
+  </style>
+</head>
+<body onload="setTimeout(function() { window.location = '/' }, 5000)">
+  <div id="page">
+    <h1 class="title">Page Unavailable</h1>
+    <p>The page you requested is temporarily unavailable.</p>
+    <p>We're redirecting you to the <a href="/">homepage</a> in 5 seconds.</p>
+    <div class="error">(Error "} + obj.status + " " + obj.response + {")</div>
+  </div>
+</body>
+</html>
+"};
+  return (deliver);
+}
+
+
+
+
+
+########################################
+
+
+
 # 
 # Below is a commented-out copy of the default VCL logic.  If you
 # redefine any of these subroutines, the built-in logic will be
 # appended to your code.
- sub vcl_recv {
-
-
-	
-# Allow the backend to serve up stale content if it is responding slowly.
-  set req.grace = 6h;
-
-# Use anonymous, cached pages if all backends are down.
-  if (!req.backend.healthy) {	
-	unset req.http.Cookie;
-  }
-
-# Always cache the following file types for all users.
-  if (req.url ~ "(?i)\.(png|gif|jpeg|jpg|ico|swf|css|js|html|htm)(\?[a-z0-9]+)?$") {
-    unset req.http.Cookie;
-  }
-
-# Remove all cookies that Drupal doesn't need to know about. ANY remaining
-# cookie will cause the request to pass-through to Apache. For the most part
-# we always set the NO_CACHE cookie after any POST request, disabling the
-# Varnish cache temporarily. The session cookie allows all authenticated users
-# to pass through as long as they're logged in.
-
-  if (req.http.Cookie) {
-	set req.http.Cookie = ";" + req.http.Cookie;
-	set req.http.Cookie = regsuball(req.http.Cookie, "; +", ";");
-	set req.http.Cookie = regsuball(req.http.Cookie,";(SESS[a-z0-9]+|NO_CACHE)=", "; \1=");
-	set req.http.Cookie = regsuball(req.http.Cookie, ";[^ ][^;]*", "");
-	set req.http.Cookie = regsuball(req.http.Cookie, "^[; ]+|[; ]+$", "");
-	if (req.http.Cookie == "") {
-
-	# If there are no remaining cookies, remove the cookie header. If there
-  	# aren't any cookie headers, Varnish's default behavior will be to cache
-  	# the page.
-  			unset req.http.Cookie;
-		}
-	else {
-	# If there are any cookies left (a session or NO_CACHE cookie), do not
-  	# cache the page. Pass it on to Apache directly.
-  		return (pass);
-		}
-  }
-
-# Handle compression correctly. Different browsers send different
-# "Accept-Encoding" headers, even though they mostly all support the same
-# compression mechanisms. By consolidating these compression headers into
-# a consistent format, we can reduce the size of the cache and get more hits.
-# @see: http:// varnish.projects.linpro.no/wiki/FAQ/Compression
-
-if (req.http.Accept-Encoding) {
-  if (req.http.Accept-Encoding ~ "gzip") {
-# If the browser supports it, we'll use gzip.
-	set req.http.Accept-Encoding = "gzip";
-  }
-  else if (req.http.Accept-Encoding ~ "deflate") {
-	# Next, try deflate if it is supported.
-	set req.http.Accept-Encoding = "deflate";
-  }
-  else {
-	# Unknown algorithm. Remove it and send unencoded.
-	unset req.http.Accept-Encoding;
-  }
-}
-
-
-// Skip the Varnish cache for install, update, and cron
-   if (req.url ~ "install\.php|update\.php|cron\.php") {
-    return (pass);
-   }
-
-	   
-    # Let Drupal know client IP.
-    remove req.http.X-Forwarded-For;
-     set req.http.X-Forwarded-For = client.ip;
-
-
-     if (req.restarts == 0) {
- 	if (req.http.x-forwarded-for) {
- 	    set req.http.X-Forwarded-For =
- 		req.http.X-Forwarded-For + ", " + client.ip;
- 	} else {
- 	    set req.http.X-Forwarded-For = client.ip;
- 	}
-     }
-     if (req.request != "GET" &&
-       req.request != "HEAD" &&
-       req.request != "PUT" &&
-       req.request != "POST" &&
-       req.request != "TRACE" &&
-       req.request != "OPTIONS" &&
-       req.request != "DELETE") {
-         /* Non-RFC2616 or CONNECT which is weird. */
-         return (pipe);
-     }
-     if (req.request != "GET" && req.request != "HEAD") {
-         /* We only deal with GET and HEAD by default */
-         return (pass);
-     }
-     if (req.http.Authorization || req.http.Cookie) {
-         /* Not cacheable by default */
-         return (pass);
-     }
-     return (lookup);
- }
+# sub vcl_recv {
+#     if (req.restarts == 0) {
+#   if (req.http.x-forwarded-for) {
+#       set req.http.X-Forwarded-For =
+#     req.http.X-Forwarded-For + ", " + client.ip;
+#   } else {
+#       set req.http.X-Forwarded-For = client.ip;
+#   }
+#     }
+#     if (req.request != "GET" &&
+#       req.request != "HEAD" &&
+#       req.request != "PUT" &&
+#       req.request != "POST" &&
+#       req.request != "TRACE" &&
+#       req.request != "OPTIONS" &&
+#       req.request != "DELETE") {
+#         /* Non-RFC2616 or CONNECT which is weird. */
+#         return (pipe);
+#     }
+#     if (req.request != "GET" && req.request != "HEAD") {
+#         /* We only deal with GET and HEAD by default */
+#         return (pass);
+#     }
+#     if (req.http.Authorization || req.http.Cookie) {
+#         /* Not cacheable by default */
+#         return (pass);
+#     }
+#     return (lookup);
+# }
 # 
 # sub vcl_pipe {
 #     # Note that only the first request to the backend will have
@@ -149,10 +256,18 @@ if (req.http.Accept-Encoding) {
 #     return (fetch);
 # }
 # 
- sub vcl_fetch {
-	set beresp.grace = 6h;
-
- }
+# sub vcl_fetch {
+#     if (beresp.ttl <= 0s ||
+#         beresp.http.Set-Cookie ||
+#         beresp.http.Vary == "*") {
+#     /*
+#      * Mark as "Hit-For-Pass" for the next 2 minutes
+#      */
+#     set beresp.ttl = 120 s;
+#     return (hit_for_pass);
+#     }
+#     return (deliver);
+# }
 # 
 # sub vcl_deliver {
 #     return (deliver);
@@ -183,9 +298,9 @@ if (req.http.Accept-Encoding) {
 # }
 # 
 # sub vcl_init {
-# 	return (ok);
+#   return (ok);
 # }
 # 
 # sub vcl_fini {
-# 	return (ok);
+#   return (ok);
 # }
