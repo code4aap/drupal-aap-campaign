@@ -477,19 +477,6 @@ if (!empty($np[1])) {
   $handler->display->display_options['sorts']['created']['table'] = 'node';
   $handler->display->display_options['sorts']['created']['field'] = 'created';
   $handler->display->display_options['sorts']['created']['order'] = 'DESC';
-  /* Contextual filter: Content: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['nid']['default_argument_options']['code'] = '$constituency_nid = arg(1);
-$constituency_node = node_load($constituency_nid );
-$candidate_nid = $constituency_node-> field_constituency_candidate[\'und\'][0][\'target_id\'];
-return $candidate_nid;';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
 
   /* Display: News */
   $handler = $view->new_display('page', 'News', 'page_1');
@@ -925,11 +912,23 @@ print $img;
   $handler->display->display_options['empty']['area']['format'] = 'plain_text';
   $handler->display->display_options['empty']['area']['tokenize'] = TRUE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_candidate_constituency_node']['id'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['relationships']['reverse_field_candidate_constituency_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_candidate_constituency_node']['field'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['relationships']['reverse_field_candidate_constituency_node']['required'] = TRUE;
+  /* Relationship: Flags: aap_selected_candidate */
+  $handler->display->display_options['relationships']['flag_content_rel']['id'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['table'] = 'node';
+  $handler->display->display_options['relationships']['flag_content_rel']['field'] = 'flag_content_rel';
+  $handler->display->display_options['relationships']['flag_content_rel']['relationship'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['relationships']['flag_content_rel']['flag'] = 'aap_selected_candidate';
   $handler->display->display_options['defaults']['fields'] = FALSE;
   /* Field: Content: Constituency Name */
   $handler->display->display_options['fields']['field_candidate_constituency']['id'] = 'field_candidate_constituency';
   $handler->display->display_options['fields']['field_candidate_constituency']['table'] = 'field_data_field_candidate_constituency';
   $handler->display->display_options['fields']['field_candidate_constituency']['field'] = 'field_candidate_constituency';
+  $handler->display->display_options['fields']['field_candidate_constituency']['relationship'] = 'reverse_field_candidate_constituency_node';
   $handler->display->display_options['fields']['field_candidate_constituency']['label'] = '';
   $handler->display->display_options['fields']['field_candidate_constituency']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_candidate_constituency']['alter']['text'] = '<div class="aap-candidate-consituency">AAP Candidate from [field_candidate_constituency]</div>';
@@ -941,6 +940,7 @@ print $img;
   $handler->display->display_options['fields']['field_candidate_photograph']['id'] = 'field_candidate_photograph';
   $handler->display->display_options['fields']['field_candidate_photograph']['table'] = 'field_data_field_candidate_photograph';
   $handler->display->display_options['fields']['field_candidate_photograph']['field'] = 'field_candidate_photograph';
+  $handler->display->display_options['fields']['field_candidate_photograph']['relationship'] = 'reverse_field_candidate_constituency_node';
   $handler->display->display_options['fields']['field_candidate_photograph']['label'] = '';
   $handler->display->display_options['fields']['field_candidate_photograph']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['field_candidate_photograph']['click_sort_column'] = 'fid';
@@ -952,6 +952,7 @@ print $img;
   $handler->display->display_options['fields']['field_candidate_name']['id'] = 'field_candidate_name';
   $handler->display->display_options['fields']['field_candidate_name']['table'] = 'field_data_field_candidate_name';
   $handler->display->display_options['fields']['field_candidate_name']['field'] = 'field_candidate_name';
+  $handler->display->display_options['fields']['field_candidate_name']['relationship'] = 'reverse_field_candidate_constituency_node';
   $handler->display->display_options['fields']['field_candidate_name']['label'] = '';
   $handler->display->display_options['fields']['field_candidate_name']['alter']['alter_text'] = TRUE;
   $handler->display->display_options['fields']['field_candidate_name']['alter']['text'] = '<div class = "aap-candidate-name">[field_candidate_name] </div>';
@@ -960,34 +961,23 @@ print $img;
   $handler->display->display_options['fields']['body']['id'] = 'body';
   $handler->display->display_options['fields']['body']['table'] = 'field_data_body';
   $handler->display->display_options['fields']['body']['field'] = 'body';
+  $handler->display->display_options['fields']['body']['relationship'] = 'reverse_field_candidate_constituency_node';
   $handler->display->display_options['fields']['body']['label'] = '';
   $handler->display->display_options['fields']['body']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['body']['type'] = 'text_trimmed';
   $handler->display->display_options['fields']['body']['settings'] = array(
-    'trim_length' => '100',
+    'trim_length' => '300',
   );
   /* Field: Content: Link */
   $handler->display->display_options['fields']['view_node']['id'] = 'view_node';
   $handler->display->display_options['fields']['view_node']['table'] = 'views_entity_node';
   $handler->display->display_options['fields']['view_node']['field'] = 'view_node';
+  $handler->display->display_options['fields']['view_node']['relationship'] = 'reverse_field_candidate_constituency_node';
   $handler->display->display_options['fields']['view_node']['label'] = '';
   $handler->display->display_options['fields']['view_node']['alter']['text'] = '<div class = "aap-candiate-more">[view_node]</div>';
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_node']['text'] = 'know more...';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
-  /* Contextual filter: Content: Nid */
-  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['table'] = 'node';
-  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
-  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
-  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'php';
-  $handler->display->display_options['arguments']['nid']['default_argument_options']['code'] = '$constituency_nid = arg(1);
-$constituency_node = node_load($constituency_nid );
-$candidate_nid = $constituency_node-> field_constituency_candidate[\'und\'][0][\'target_id\'];
-return $candidate_nid;';
-  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
-  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
-  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -996,6 +986,7 @@ return $candidate_nid;';
   $handler->display->display_options['filters']['type']['field'] = 'type';
   $handler->display->display_options['filters']['type']['value'] = array(
     'candidate_details_page' => 'candidate_details_page',
+    'constituency_page' => 'constituency_page',
   );
   /* Filter criterion: Content: Published */
   $handler->display->display_options['filters']['status']['id'] = 'status';
@@ -1017,20 +1008,35 @@ return $candidate_nid;';
   $handler->display->display_options['style_plugin'] = 'default';
   $handler->display->display_options['defaults']['style_options'] = FALSE;
   $handler->display->display_options['defaults']['row_plugin'] = FALSE;
-  $handler->display->display_options['row_plugin'] = 'fields';
+  $handler->display->display_options['row_plugin'] = 'node';
+  $handler->display->display_options['row_options']['relationship'] = 'reverse_field_candidate_constituency_node';
   $handler->display->display_options['defaults']['row_options'] = FALSE;
   $handler->display->display_options['defaults']['relationships'] = FALSE;
+  /* Relationship: Entity Reference: Referencing entity */
+  $handler->display->display_options['relationships']['reverse_field_candidate_constituency_node']['id'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['relationships']['reverse_field_candidate_constituency_node']['table'] = 'node';
+  $handler->display->display_options['relationships']['reverse_field_candidate_constituency_node']['field'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['relationships']['reverse_field_candidate_constituency_node']['required'] = TRUE;
   $handler->display->display_options['defaults']['fields'] = FALSE;
-  /* Field: Content: Shortlisted Candidates */
-  $handler->display->display_options['fields']['field_constituency_shortlisted_c']['id'] = 'field_constituency_shortlisted_c';
-  $handler->display->display_options['fields']['field_constituency_shortlisted_c']['table'] = 'field_data_field_constituency_shortlisted_c';
-  $handler->display->display_options['fields']['field_constituency_shortlisted_c']['field'] = 'field_constituency_shortlisted_c';
-  $handler->display->display_options['fields']['field_constituency_shortlisted_c']['type'] = 'entityreference_entity_view';
-  $handler->display->display_options['fields']['field_constituency_shortlisted_c']['settings'] = array(
-    'view_mode' => 'teaser',
-    'links' => 1,
+  /* Field: Content: Photograph */
+  $handler->display->display_options['fields']['field_candidate_photograph']['id'] = 'field_candidate_photograph';
+  $handler->display->display_options['fields']['field_candidate_photograph']['table'] = 'field_data_field_candidate_photograph';
+  $handler->display->display_options['fields']['field_candidate_photograph']['field'] = 'field_candidate_photograph';
+  $handler->display->display_options['fields']['field_candidate_photograph']['relationship'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['fields']['field_candidate_photograph']['label'] = '';
+  $handler->display->display_options['fields']['field_candidate_photograph']['element_label_colon'] = FALSE;
+  $handler->display->display_options['fields']['field_candidate_photograph']['click_sort_column'] = 'fid';
+  $handler->display->display_options['fields']['field_candidate_photograph']['settings'] = array(
+    'image_style' => 'thumbnail',
+    'image_link' => '',
   );
-  $handler->display->display_options['fields']['field_constituency_shortlisted_c']['delta_offset'] = '0';
+  /* Field: Content: Name */
+  $handler->display->display_options['fields']['field_candidate_name']['id'] = 'field_candidate_name';
+  $handler->display->display_options['fields']['field_candidate_name']['table'] = 'field_data_field_candidate_name';
+  $handler->display->display_options['fields']['field_candidate_name']['field'] = 'field_candidate_name';
+  $handler->display->display_options['fields']['field_candidate_name']['relationship'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['fields']['field_candidate_name']['label'] = '';
+  $handler->display->display_options['fields']['field_candidate_name']['element_label_colon'] = FALSE;
   $handler->display->display_options['defaults']['arguments'] = FALSE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
