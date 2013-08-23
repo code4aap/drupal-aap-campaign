@@ -37,7 +37,7 @@ function f_delhi_panel_layout_default_page_manager_handlers() {
     ),
     'pipeline' => 'standard',
     'body_classes_to_remove' => '',
-    'body_classes_to_add' => 'aap-body-class',
+    'body_classes_to_add' => 'aap-body-class aap-delhi-body-class',
   );
   $display = new panels_display();
   $display->layout = 'flexible';
@@ -308,7 +308,7 @@ function f_delhi_panel_layout_default_page_manager_handlers() {
     $pane->shown = TRUE;
     $pane->access = array();
     $pane->configuration = array(
-      'override_title' => 0,
+      'override_title' => 1,
       'override_title_text' => '',
     );
     $pane->cache = array();
