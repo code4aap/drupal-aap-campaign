@@ -61,6 +61,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           1 => 'candidate_info_region',
         ),
         'parent' => 'main',
+        'class' => 'aap-delhi-row',
       ),
       1 => array(
         'type' => 'row',
@@ -69,7 +70,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           0 => 'about_candidate',
         ),
         'parent' => 'main',
-        'class' => '',
+        'class' => 'aap-delhi-row',
       ),
       2 => array(
         'type' => 'row',
@@ -79,7 +80,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           1 => 'candidate_fb_region',
         ),
         'parent' => 'main',
-        'class' => '',
+        'class' => 'aap-delhi-row',
       ),
       3 => array(
         'type' => 'row',
@@ -88,7 +89,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           0 => 'candidate_additional_region',
         ),
         'parent' => 'main',
-        'class' => '',
+        'class' => 'aap-delhi-row',
       ),
       'photograph_region' => array(
         'type' => 'region',
@@ -120,7 +121,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
         'width' => 50,
         'width_type' => '%',
         'parent' => '2',
-        'class' => 'candidate-key-msg-region',
+        'class' => 'candidate-key-msg-region aap-delhi-left-region',
       ),
       'candidate_fb_region' => array(
         'type' => 'region',
@@ -128,7 +129,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
         'width' => 50,
         'width_type' => '%',
         'parent' => '2',
-        'class' => 'candidate-fb-region',
+        'class' => 'candidate-fb-region aap-delhi-right-region',
       ),
       'candidate_additional_region' => array(
         'type' => 'region',
@@ -716,7 +717,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           1 => 'constituency_detail_region',
         ),
         'parent' => 'main',
-        'class' => 'aap-constituency-row',
+        'class' => 'aap-delhi-row',
       ),
       'center' => array(
         'type' => 'region',
@@ -734,7 +735,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           1 => 'constituency_fb_block',
         ),
         'parent' => 'main',
-        'class' => 'aap-constituency-row',
+        'class' => 'aap-delhi-row',
       ),
       2 => array(
         'type' => 'row',
@@ -743,7 +744,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           0 => 'adopt_constituency',
         ),
         'parent' => 'main',
-        'class' => 'aap-constituency-row',
+        'class' => 'aap-delhi-row',
       ),
       3 => array(
         'type' => 'row',
@@ -753,7 +754,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           1 => 'candidate_region',
         ),
         'parent' => 'main',
-        'class' => 'aap-constituency-row',
+        'class' => 'aap-delhi-row',
       ),
       'constituency_detail_region' => array(
         'type' => 'region',
@@ -769,7 +770,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
         'width' => 50,
         'width_type' => '%',
         'parent' => '1',
-        'class' => 'constituency-key-issue-region',
+        'class' => 'constituency-key-issue-region aap-delhi-left-region',
       ),
       'constituency_fb_block' => array(
         'type' => 'region',
@@ -777,7 +778,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
         'width' => 50,
         'width_type' => '%',
         'parent' => '1',
-        'class' => 'constituency-FB-region',
+        'class' => 'constituency-FB-region aap-delhi-right-region',
       ),
       'adopt_constituency' => array(
         'type' => 'region',
@@ -793,7 +794,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
         'width' => 50,
         'width_type' => '%',
         'parent' => '3',
-        'class' => 'constituency-contact-region',
+        'class' => 'constituency-contact-region aap-delhi-right-region',
       ),
       'container_1' => array(
         'type' => 'region',
@@ -801,7 +802,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
         'width' => 50,
         'width_type' => '%',
         'parent' => '3',
-        'class' => 'container1-constituency-region',
+        'class' => 'container1-constituency-region aap-delhi-left-region',
       ),
       4 => array(
         'type' => 'row',
@@ -846,7 +847,9 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->type = 'views';
     $pane->subtype = 'landing_pages';
     $pane->shown = TRUE;
-    $pane->access = array();
+    $pane->access = array(
+      'plugins' => array(),
+    );
     $pane->configuration = array(
       'override_pager_settings' => 0,
       'use_pager' => 0,
@@ -878,6 +881,59 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $display->panels['adopt_constituency'][0] = 'new-19';
     $pane = new stdClass();
     $pane->pid = 'new-20';
+    $pane->panel = 'adopt_constituency';
+    $pane->type = 'views';
+    $pane->subtype = 'landing_pages';
+    $pane->shown = TRUE;
+    $pane->access = array(
+      'plugins' => array(
+        0 => array(
+          'name' => 'php',
+          'settings' => array(
+            'description' => 'AAP Candidate Selected',
+            'php' => '$constituency_nid = arg(1);
+		if (variable_get(\'AAP_Selected_candidate\' . $constituency_nid , \'no\') ==  \'yes\') {
+			return FALSE;
+		}	
+		else {
+			return TRUE;
+		}	',
+          ),
+          'not' => FALSE,
+        ),
+      ),
+    );
+    $pane->configuration = array(
+      'override_pager_settings' => 0,
+      'use_pager' => 0,
+      'nodes_per_page' => '5',
+      'pager_id' => '0',
+      'offset' => '0',
+      'more_link' => 0,
+      'feed_icons' => 0,
+      'panel_args' => 0,
+      'link_to_view' => 0,
+      'args' => '',
+      'url' => '',
+      'display' => 'block_6',
+      'override_title' => 1,
+      'override_title_text' => 'Shortlisted Candidate',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => '',
+    );
+    $pane->extras = array();
+    $pane->position = 1;
+    $pane->locks = array();
+    $display->content['new-20'] = $pane;
+    $display->panels['adopt_constituency'][1] = 'new-20';
+    $pane = new stdClass();
+    $pane->pid = 'new-21';
     $pane->panel = 'candidate_region';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_contact_conta';
@@ -902,10 +958,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-20'] = $pane;
-    $display->panels['candidate_region'][0] = 'new-20';
+    $display->content['new-21'] = $pane;
+    $display->panels['candidate_region'][0] = 'new-21';
     $pane = new stdClass();
-    $pane->pid = 'new-21';
+    $pane->pid = 'new-22';
     $pane->panel = 'center';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_image_';
@@ -931,10 +987,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-21'] = $pane;
-    $display->panels['center'][0] = 'new-21';
+    $display->content['new-22'] = $pane;
+    $display->panels['center'][0] = 'new-22';
     $pane = new stdClass();
-    $pane->pid = 'new-22';
+    $pane->pid = 'new-23';
     $pane->panel = 'constituency_container';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_container_2';
@@ -960,10 +1016,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-22'] = $pane;
-    $display->panels['constituency_container'][0] = 'new-22';
+    $display->content['new-23'] = $pane;
+    $display->panels['constituency_container'][0] = 'new-23';
     $pane = new stdClass();
-    $pane->pid = 'new-23';
+    $pane->pid = 'new-24';
     $pane->panel = 'constituency_container';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_container_3';
@@ -989,10 +1045,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-23'] = $pane;
-    $display->panels['constituency_container'][1] = 'new-23';
+    $display->content['new-24'] = $pane;
+    $display->panels['constituency_container'][1] = 'new-24';
     $pane = new stdClass();
-    $pane->pid = 'new-24';
+    $pane->pid = 'new-25';
     $pane->panel = 'constituency_container';
     $pane->type = 'block';
     $pane->subtype = 'service_links-service_links';
@@ -1013,10 +1069,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $display->content['new-24'] = $pane;
-    $display->panels['constituency_container'][2] = 'new-24';
+    $display->content['new-25'] = $pane;
+    $display->panels['constituency_container'][2] = 'new-25';
     $pane = new stdClass();
-    $pane->pid = 'new-25';
+    $pane->pid = 'new-26';
     $pane->panel = 'constituency_container';
     $pane->type = 'block';
     $pane->subtype = 'disqus-disqus_comments';
@@ -1034,10 +1090,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 3;
     $pane->locks = array();
-    $display->content['new-25'] = $pane;
-    $display->panels['constituency_container'][3] = 'new-25';
+    $display->content['new-26'] = $pane;
+    $display->panels['constituency_container'][3] = 'new-26';
     $pane = new stdClass();
-    $pane->pid = 'new-26';
+    $pane->pid = 'new-27';
     $pane->panel = 'constituency_detail_region';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency';
@@ -1064,10 +1120,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-26'] = $pane;
-    $display->panels['constituency_detail_region'][0] = 'new-26';
+    $display->content['new-27'] = $pane;
+    $display->panels['constituency_detail_region'][0] = 'new-27';
     $pane = new stdClass();
-    $pane->pid = 'new-27';
+    $pane->pid = 'new-28';
     $pane->panel = 'constituency_detail_region';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:body';
@@ -1093,10 +1149,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-27'] = $pane;
-    $display->panels['constituency_detail_region'][1] = 'new-27';
+    $display->content['new-28'] = $pane;
+    $display->panels['constituency_detail_region'][1] = 'new-28';
     $pane = new stdClass();
-    $pane->pid = 'new-28';
+    $pane->pid = 'new-29';
     $pane->panel = 'container_1';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_container_1';
@@ -1119,10 +1175,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-28'] = $pane;
-    $display->panels['container_1'][0] = 'new-28';
+    $display->content['new-29'] = $pane;
+    $display->panels['container_1'][0] = 'new-29';
     $pane = new stdClass();
-    $pane->pid = 'new-29';
+    $pane->pid = 'new-30';
     $pane->panel = 'key_issue';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_key_issue';
@@ -1145,10 +1201,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-29'] = $pane;
-    $display->panels['key_issue'][0] = 'new-29';
+    $display->content['new-30'] = $pane;
+    $display->panels['key_issue'][0] = 'new-30';
   $display->hide_title = PANELS_TITLE_NONE;
-  $display->title_pane = 'new-21';
+  $display->title_pane = 'new-22';
   $panelizer->display = $display;
   $export['node:constituency_page:default:default'] = $panelizer;
 
