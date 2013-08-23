@@ -19,6 +19,43 @@ function f_delhi_content_types_ctools_plugin_api() {
  */
 function f_delhi_content_types_flag_default_flags() {
   $flags = array();
+  // Exported flag: "AAP Remove Candidate".
+  $flags['aap_remove_candidate'] = array(
+    'content_type' => 'node',
+    'title' => 'AAP Remove Candidate',
+    'global' => '1',
+    'types' => array(
+      0 => 'candidate_details_page',
+    ),
+    'flag_short' => 'Remove this candidate',
+    'flag_long' => 'Remove this candidate',
+    'flag_message' => 'Remove this candidate',
+    'unflag_short' => 'Add this candidate',
+    'unflag_long' => 'Add this candidate',
+    'unflag_message' => 'Add this candidate',
+    'unflag_denied_text' => '',
+    'link_type' => 'toggle',
+    'roles' => array(
+      'flag' => array(
+        0 => '9',
+      ),
+      'unflag' => array(
+        0 => '9',
+      ),
+    ),
+    'weight' => 0,
+    'show_on_form' => 0,
+    'access_author' => '',
+    'show_on_page' => 0,
+    'show_on_teaser' => 0,
+    'show_contextual_link' => 0,
+    'i18n' => 0,
+    'api_version' => 2,
+    'module' => 'f_delhi_content_types',
+    'locked' => array(
+      0 => 'name',
+    ),
+  );
   // Exported flag: "AAP Selected Candidate".
   $flags['aap_selected_candidate'] = array(
     'content_type' => 'node',
@@ -33,43 +70,6 @@ function f_delhi_content_types_flag_default_flags() {
     'unflag_short' => 'Mark as not selected candidate',
     'unflag_long' => 'Candidate marked as a unselected',
     'unflag_message' => 'Candidate is in waiting',
-    'unflag_denied_text' => '',
-    'link_type' => 'toggle',
-    'roles' => array(
-      'flag' => array(
-        0 => '9',
-      ),
-      'unflag' => array(
-        0 => '9',
-      ),
-    ),
-    'weight' => 0,
-    'show_on_form' => 0,
-    'access_author' => '',
-    'show_on_page' => 1,
-    'show_on_teaser' => 1,
-    'show_contextual_link' => 0,
-    'i18n' => 0,
-    'api_version' => 2,
-    'module' => 'f_delhi_content_types',
-    'locked' => array(
-      0 => 'name',
-    ),
-  );
-  // Exported flag: "AAP Shortlisted Candidate".
-  $flags['aap_shorlist_candidate'] = array(
-    'content_type' => 'node',
-    'title' => 'AAP Shortlisted Candidate',
-    'global' => '1',
-    'types' => array(
-      0 => 'candidate_details_page',
-    ),
-    'flag_short' => 'Shortlist this candidate',
-    'flag_long' => 'Mark as shortlisted candidate',
-    'flag_message' => 'Candidate is now shortlisted',
-    'unflag_short' => 'Remove from shortlisted candidate list',
-    'unflag_long' => 'Remove from shortlisted candidate list',
-    'unflag_message' => 'Candidate has removed form shortlisted list',
     'unflag_denied_text' => '',
     'link_type' => 'toggle',
     'roles' => array(
