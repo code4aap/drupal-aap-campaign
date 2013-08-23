@@ -141,7 +141,7 @@ function f_site_views_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
-            'image_style' => '',
+            'image_style' => 'image_slideshow',
           ),
           'type' => 'image',
           'weight' => '3',
