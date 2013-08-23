@@ -2,6 +2,7 @@ name = Delhi Panel Layout
 description = Contain Panelizer, AAP Candidate Layout, Delhi Front Layout
 core = 7.x
 package = Delhi Site Theme
+php = 5.2.4
 version = 7.x-1.0
 project = f_delhi_panel_layout
 dependencies[] = ctools
