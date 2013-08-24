@@ -206,7 +206,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'aap-delhi-region',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
@@ -234,7 +237,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'aap-delhi-region',
+    );
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
@@ -414,7 +420,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
       'delta_offset' => '0',
       'delta_reversed' => FALSE,
       'formatter_settings' => array(
-        'link' => 0,
+        'link' => 1,
       ),
       'context' => 'panelizer',
       'override_title' => 0,
@@ -744,7 +750,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           0 => 'adopt_constituency',
         ),
         'parent' => 'main',
-        'class' => 'aap-delhi-row',
+        'class' => '',
       ),
       3 => array(
         'type' => 'row',
@@ -811,7 +817,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
           0 => 'constituency_container',
         ),
         'parent' => 'main',
-        'class' => '',
+        'class' => 'aap-delhi-row',
       ),
       'constituency_container' => array(
         'type' => 'region',
@@ -873,7 +879,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'aap-delhi-region',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
@@ -925,7 +934,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => '',
+      'css_class' => 'aap-delhi-region',
     );
     $pane->extras = array();
     $pane->position = 1;
@@ -934,6 +943,37 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $display->panels['adopt_constituency'][1] = 'new-20';
     $pane = new stdClass();
     $pane->pid = 'new-21';
+    $pane->panel = 'candidate_region';
+    $pane->type = 'entity_field';
+    $pane->subtype = 'node:field_constituency_contact';
+    $pane->shown = TRUE;
+    $pane->access = array();
+    $pane->configuration = array(
+      'label' => 'hidden',
+      'formatter' => 'location_default',
+      'delta_limit' => 0,
+      'delta_offset' => '0',
+      'delta_reversed' => FALSE,
+      'formatter_settings' => array(),
+      'context' => 'panelizer',
+      'override_title' => 1,
+      'override_title_text' => 'Contact us at',
+    );
+    $pane->cache = array();
+    $pane->style = array(
+      'settings' => NULL,
+    );
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'constituency-contact-fields',
+    );
+    $pane->extras = array();
+    $pane->position = 0;
+    $pane->locks = array();
+    $display->content['new-21'] = $pane;
+    $display->panels['candidate_region'][0] = 'new-21';
+    $pane = new stdClass();
+    $pane->pid = 'new-22';
     $pane->panel = 'candidate_region';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_contact_conta';
@@ -954,14 +994,17 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'constituency-contact-container',
+    );
     $pane->extras = array();
-    $pane->position = 0;
+    $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-21'] = $pane;
-    $display->panels['candidate_region'][0] = 'new-21';
+    $display->content['new-22'] = $pane;
+    $display->panels['candidate_region'][1] = 'new-22';
     $pane = new stdClass();
-    $pane->pid = 'new-22';
+    $pane->pid = 'new-23';
     $pane->panel = 'center';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_image_';
@@ -987,10 +1030,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-22'] = $pane;
-    $display->panels['center'][0] = 'new-22';
+    $display->content['new-23'] = $pane;
+    $display->panels['center'][0] = 'new-23';
     $pane = new stdClass();
-    $pane->pid = 'new-23';
+    $pane->pid = 'new-24';
     $pane->panel = 'constituency_container';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_container_2';
@@ -1004,6 +1047,8 @@ function f_delhi_panel_layout_panelizer_defaults() {
       'delta_reversed' => FALSE,
       'formatter_settings' => array(),
       'context' => 'panelizer',
+      'override_title' => 0,
+      'override_title_text' => '',
     );
     $pane->cache = array();
     $pane->style = array(
@@ -1011,15 +1056,15 @@ function f_delhi_panel_layout_panelizer_defaults() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => '',
+      'css_class' => 'aap-delhi-region',
     );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-23'] = $pane;
-    $display->panels['constituency_container'][0] = 'new-23';
+    $display->content['new-24'] = $pane;
+    $display->panels['constituency_container'][0] = 'new-24';
     $pane = new stdClass();
-    $pane->pid = 'new-24';
+    $pane->pid = 'new-25';
     $pane->panel = 'constituency_container';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_container_3';
@@ -1040,15 +1085,15 @@ function f_delhi_panel_layout_panelizer_defaults() {
     );
     $pane->css = array(
       'css_id' => '',
-      'css_class' => '',
+      'css_class' => 'aap-delhi-region',
     );
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-24'] = $pane;
-    $display->panels['constituency_container'][1] = 'new-24';
+    $display->content['new-25'] = $pane;
+    $display->panels['constituency_container'][1] = 'new-25';
     $pane = new stdClass();
-    $pane->pid = 'new-25';
+    $pane->pid = 'new-26';
     $pane->panel = 'constituency_container';
     $pane->type = 'block';
     $pane->subtype = 'service_links-service_links';
@@ -1069,10 +1114,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 2;
     $pane->locks = array();
-    $display->content['new-25'] = $pane;
-    $display->panels['constituency_container'][2] = 'new-25';
+    $display->content['new-26'] = $pane;
+    $display->panels['constituency_container'][2] = 'new-26';
     $pane = new stdClass();
-    $pane->pid = 'new-26';
+    $pane->pid = 'new-27';
     $pane->panel = 'constituency_container';
     $pane->type = 'block';
     $pane->subtype = 'disqus-disqus_comments';
@@ -1090,10 +1135,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 3;
     $pane->locks = array();
-    $display->content['new-26'] = $pane;
-    $display->panels['constituency_container'][3] = 'new-26';
+    $display->content['new-27'] = $pane;
+    $display->panels['constituency_container'][3] = 'new-27';
     $pane = new stdClass();
-    $pane->pid = 'new-27';
+    $pane->pid = 'new-28';
     $pane->panel = 'constituency_detail_region';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency';
@@ -1120,10 +1165,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-27'] = $pane;
-    $display->panels['constituency_detail_region'][0] = 'new-27';
+    $display->content['new-28'] = $pane;
+    $display->panels['constituency_detail_region'][0] = 'new-28';
     $pane = new stdClass();
-    $pane->pid = 'new-28';
+    $pane->pid = 'new-29';
     $pane->panel = 'constituency_detail_region';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:body';
@@ -1149,10 +1194,10 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->extras = array();
     $pane->position = 1;
     $pane->locks = array();
-    $display->content['new-28'] = $pane;
-    $display->panels['constituency_detail_region'][1] = 'new-28';
+    $display->content['new-29'] = $pane;
+    $display->panels['constituency_detail_region'][1] = 'new-29';
     $pane = new stdClass();
-    $pane->pid = 'new-29';
+    $pane->pid = 'new-30';
     $pane->panel = 'container_1';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_container_1';
@@ -1171,14 +1216,17 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => 'constituency-container-1',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-29'] = $pane;
-    $display->panels['container_1'][0] = 'new-29';
+    $display->content['new-30'] = $pane;
+    $display->panels['container_1'][0] = 'new-30';
     $pane = new stdClass();
-    $pane->pid = 'new-30';
+    $pane->pid = 'new-31';
     $pane->panel = 'key_issue';
     $pane->type = 'entity_field';
     $pane->subtype = 'node:field_constituency_key_issue';
@@ -1197,14 +1245,17 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->style = array(
       'settings' => NULL,
     );
-    $pane->css = array();
+    $pane->css = array(
+      'css_id' => '',
+      'css_class' => '',
+    );
     $pane->extras = array();
     $pane->position = 0;
     $pane->locks = array();
-    $display->content['new-30'] = $pane;
-    $display->panels['key_issue'][0] = 'new-30';
+    $display->content['new-31'] = $pane;
+    $display->panels['key_issue'][0] = 'new-31';
   $display->hide_title = PANELS_TITLE_NONE;
-  $display->title_pane = 'new-22';
+  $display->title_pane = 'new-23';
   $panelizer->display = $display;
   $export['node:constituency_page:default:default'] = $panelizer;
 
