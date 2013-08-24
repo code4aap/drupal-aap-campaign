@@ -50,11 +50,11 @@ function f_delhi_content_types_flag_default_flags() {
     'show_on_teaser' => 0,
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 'f_delhi_content_types',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   // Exported flag: "AAP Selected Candidate".
   $flags['aap_selected_candidate'] = array(
@@ -87,11 +87,11 @@ function f_delhi_content_types_flag_default_flags() {
     'show_on_teaser' => 1,
     'show_contextual_link' => 0,
     'i18n' => 0,
-    'api_version' => 2,
     'module' => 'f_delhi_content_types',
     'locked' => array(
       0 => 'name',
     ),
+    'api_version' => 2,
   );
   return $flags;
 

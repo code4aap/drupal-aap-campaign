@@ -1796,7 +1796,7 @@ function f_delhi_content_types_field_default_fields() {
         ),
       ),
       'deleted' => '0',
-      'description' => '',
+      'description' => 'Write miscellaneous content that will appear bottom of the contact info block.',
       'display' => array(
         'default' => array(
           'label' => 'above',
@@ -1814,7 +1814,7 @@ function f_delhi_content_types_field_default_fields() {
       ),
       'entity_type' => 'node',
       'field_name' => 'field_constituency_contact_conta',
-      'label' => 'Contact Container',
+      'label' => 'Miscellaneous Content',
       'required' => 0,
       'settings' => array(
         'display_summary' => 0,
@@ -2255,7 +2255,6 @@ function f_delhi_content_types_field_default_fields() {
   t('Constituency Image ');
   t('Constituency Name');
   t('Contact');
-  t('Contact Container');
   t('Container 1');
   t('Container 2');
   t('Container 3');
@@ -2266,11 +2265,13 @@ function f_delhi_content_types_field_default_fields() {
   t('Key Issue');
   t('Key Message');
   t('Links');
+  t('Miscellaneous Content');
   t('Name');
   t('Occupation');
   t('Phone');
   t('Photograph');
   t('Please enter candidate description');
+  t('Write miscellaneous content that will appear bottom of the contact info block.');
 
   return $fields;
 }
