@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Delhi Content Types feature.
+ */
+
+include_once 'f_delhi_content_types.features.inc';

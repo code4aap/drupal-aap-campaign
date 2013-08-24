@@ -1,0 +1,11 @@
+name = Delhi Site Views
+core = 7.x
+package = Delhi Site Theme
+version = 7.x-1.0
+project = f_delhi_site_views
+dependencies[] = panels
+dependencies[] = views
+features[ctools][] = views:views_default:3.0
+features[features_api][] = api:1
+features[views_view][] = delhi_site_views
+features_exclude[dependencies][ctools] = ctools

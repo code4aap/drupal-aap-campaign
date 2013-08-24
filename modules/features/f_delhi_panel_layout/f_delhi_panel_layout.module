@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Delhi Panel Layout feature.
+ */
+
+include_once 'f_delhi_panel_layout.features.inc';

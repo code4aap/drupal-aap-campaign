@@ -141,7 +141,7 @@ function f_site_views_field_default_fields() {
           'module' => 'image',
           'settings' => array(
             'image_link' => '',
-            'image_style' => '',
+            'image_style' => 'image_slideshow',
           ),
           'type' => 'image',
           'weight' => '3',
@@ -177,6 +177,7 @@ function f_site_views_field_default_fields() {
             'public' => 'public',
           ),
           'allowed_types' => array(
+            0 => 0,
             'audio' => 0,
             'default' => 0,
             'image' => 'image',
