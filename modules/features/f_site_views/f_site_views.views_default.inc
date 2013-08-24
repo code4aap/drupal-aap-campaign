@@ -970,6 +970,29 @@ print $img;
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_node']['text'] = 'know more...';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['nid']['default_argument_options']['code'] = '$get_candidate_nid_query = new EntityFieldQuery();
+	$get_candidate_nid_query-> entityCondition(\'entity_type\', \'node\')
+	-> entityCondition(\'bundle\', \'candidate_details_page\')
+	->fieldCondition(\'field_candidate_constituency\', \'target_id\', arg(1), \'=\');          
+		$get_candidate_nid_result = $get_candidate_nid_query->execute();
+		if (count($get_candidate_nid_result)) {
+			$nid_array = array_keys($get_candidate_nid_result[\'node\']);
+			return implode(\',\', $nid_array);
+		}
+		else {
+			return "";
+		}';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
@@ -1166,6 +1189,29 @@ print $img;
   $handler->display->display_options['fields']['view_node']['element_label_colon'] = FALSE;
   $handler->display->display_options['fields']['view_node']['text'] = 'know more...';
   $handler->display->display_options['defaults']['arguments'] = FALSE;
+  /* Contextual filter: Content: Nid */
+  $handler->display->display_options['arguments']['nid']['id'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['table'] = 'node';
+  $handler->display->display_options['arguments']['nid']['field'] = 'nid';
+  $handler->display->display_options['arguments']['nid']['relationship'] = 'reverse_field_candidate_constituency_node';
+  $handler->display->display_options['arguments']['nid']['default_action'] = 'default';
+  $handler->display->display_options['arguments']['nid']['default_argument_type'] = 'php';
+  $handler->display->display_options['arguments']['nid']['default_argument_options']['code'] = '$get_candidate_nid_query = new EntityFieldQuery();
+	$get_candidate_nid_query-> entityCondition(\'entity_type\', \'node\')
+	-> entityCondition(\'bundle\', \'candidate_details_page\')
+	->fieldCondition(\'field_candidate_constituency\', \'target_id\', arg(1), \'=\');          
+		$get_candidate_nid_result = $get_candidate_nid_query->execute();
+		if (count($get_candidate_nid_result)) {
+			$nid_array = array_keys($get_candidate_nid_result[\'node\']);
+			return implode(\',\', $nid_array);
+		}
+		else {
+			return "";
+		}';
+  $handler->display->display_options['arguments']['nid']['summary']['number_of_records'] = '0';
+  $handler->display->display_options['arguments']['nid']['summary']['format'] = 'default_summary';
+  $handler->display->display_options['arguments']['nid']['summary_options']['items_per_page'] = '25';
+  $handler->display->display_options['arguments']['nid']['break_phrase'] = TRUE;
   $handler->display->display_options['defaults']['filter_groups'] = FALSE;
   $handler->display->display_options['defaults']['filters'] = FALSE;
   /* Filter criterion: Content: Type */
