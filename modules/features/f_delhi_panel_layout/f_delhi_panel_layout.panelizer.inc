@@ -851,15 +851,13 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->pid = 'new-19';
     $pane->panel = 'adopt_constituency';
     $pane->type = 'views';
-    $pane->subtype = 'landing_pages';
+    $pane->subtype = 'delhi_site_views';
     $pane->shown = TRUE;
-    $pane->access = array(
-      'plugins' => array(),
-    );
+    $pane->access = array();
     $pane->configuration = array(
       'override_pager_settings' => 0,
-      'use_pager' => 0,
-      'nodes_per_page' => '5',
+      'use_pager' => 1,
+      'nodes_per_page' => '0',
       'pager_id' => '0',
       'offset' => '0',
       'more_link' => 0,
@@ -868,11 +866,11 @@ function f_delhi_panel_layout_panelizer_defaults() {
       'link_to_view' => 0,
       'args' => '',
       'url' => '',
-      'display' => 'block_5',
+      'display' => 'block_1',
       'context' => array(
         0 => '',
       ),
-      'override_title' => 1,
+      'override_title' => 0,
       'override_title_text' => '',
     );
     $pane->cache = array();
@@ -892,7 +890,7 @@ function f_delhi_panel_layout_panelizer_defaults() {
     $pane->pid = 'new-20';
     $pane->panel = 'adopt_constituency';
     $pane->type = 'views';
-    $pane->subtype = 'landing_pages';
+    $pane->subtype = 'delhi_site_views';
     $pane->shown = TRUE;
     $pane->access = array(
       'plugins' => array(
@@ -914,8 +912,8 @@ function f_delhi_panel_layout_panelizer_defaults() {
     );
     $pane->configuration = array(
       'override_pager_settings' => 0,
-      'use_pager' => 0,
-      'nodes_per_page' => '5',
+      'use_pager' => 1,
+      'nodes_per_page' => '0',
       'pager_id' => '0',
       'offset' => '0',
       'more_link' => 0,
@@ -924,9 +922,12 @@ function f_delhi_panel_layout_panelizer_defaults() {
       'link_to_view' => 0,
       'args' => '',
       'url' => '',
-      'display' => 'block_6',
+      'display' => 'block_3',
+      'context' => array(
+        0 => '',
+      ),
       'override_title' => 1,
-      'override_title_text' => 'Shortlisted Candidate',
+      'override_title_text' => 'Shortlisted Candidates',
     );
     $pane->cache = array();
     $pane->style = array(

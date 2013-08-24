@@ -1,0 +1,7 @@
+<?php
+/**
+ * @file
+ * Code for the Delhi Site Views feature.
+ */
+
+include_once 'f_delhi_site_views.features.inc';
